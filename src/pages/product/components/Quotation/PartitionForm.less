@@ -1,0 +1,28 @@
+@import '~antd/es/style/themes/default.less';
+.h0 {
+  :global {
+    .ant-form-item-control-input {
+      height: 0;
+      min-height: 0;
+    }
+    .ant-input {
+      display: none;
+    }
+  }
+}
+.desc {
+  color: @text-color-secondary;
+  font-size: 14px;
+  .button {
+    margin-right: @margin-sm;
+  }
+}
+.table {
+  min-height: 200px;
+  margin-top: @margin-md;
+  :global {
+    .ant-card-body {
+      padding: 0;
+    }
+  }
+}

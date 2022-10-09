@@ -1,0 +1,57 @@
+.modal {
+  :global {
+    .ant-pro-steps-form-container {
+      width: 520px;
+    }
+  }
+}
+
+.table {
+  margin-top: 24px;
+  width: 100%;
+  margin-bottom: 50px;
+
+  .error {
+    position: absolute;
+    color: #f00;
+  }
+
+  tr {
+    position: relative;
+  }
+
+  th {
+    position: relative;
+    color: #000;
+    font-weight: 500;
+    text-align: left;
+    background: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.3s ease;
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 1px;
+      height: 1.6em;
+      background-color: #0000000f;
+      transform: translateY(-50%);
+      transition: background-color 0.3s;
+      content: '';
+    }
+  }
+
+  td {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.3s;
+  }
+
+  th,
+  td {
+    min-width: 80px;
+    padding: 16px 0;
+    text-align: center;
+    overflow-wrap: break-word;
+  }
+}
