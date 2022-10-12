@@ -25,18 +25,20 @@ const EditIndex: React.FC = () => {
   const initialValues = useMemo(() => {
     if (!data) return undefined;
     let deptPath = undefined;
-    if (data.deptDto?.deptPath) {
-      deptPath = [...data.deptDto.deptPath?.split(','), data.deptDto.deptNo];
-    } else if (data.deptDto?.deptNo) {
-      deptPath = [data.deptDto.deptNo];
+    if (data.dept?.ancestors) {
+      deptPath = [
+        ...data.dept.ancestors
+          ?.split(',')
+          ?.map((i) => parseInt(i, 10))
+          ?.splice(1),
+      ];
     }
-
     const values: any = {
       ...data,
-      companyType: data.companyDto.companyType,
-      userBirthday: _isNil(data?.userBirthday) ? undefined : moment(data?.userBirthday),
-      roleNo: _first(data?.roleDtos)?.roleNo,
-      deptPath: deptPath,
+      // companyType: data.companyDto.companyType,
+      // userBirthday: _isNil(data?.userBirthday) ? undefined : moment(data?.userBirthday),
+      roleIds: _first(data?.roles)?.roleId,
+      deptId: deptPath,
     };
     return values;
   }, [data]);

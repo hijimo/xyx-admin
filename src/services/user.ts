@@ -43,7 +43,7 @@ export async function logout() {
  * @returns
  */
 export async function updateUserPassword(data: UpdateUserPasswordParams) {
-  return request<ResponseData>('/api/userlogin/changepwd', {
+  return request<ResponseData>('/api/system/user/resetPwd', {
     method: 'POST',
     data,
   });

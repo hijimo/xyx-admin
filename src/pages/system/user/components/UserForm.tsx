@@ -9,8 +9,9 @@ import CompanySelect from '@/components/DataSelect/CompanySelect';
 import RoleSelect from '@/components/DataSelect/RoleSelect';
 // import SexSelect from '@/components/DataSelect/SexSelect';
 import UserTypeSelect from '@/components/DataSelect/UserTypeSelect';
+import DictSelect from '@/components/DictSelect';
 import DeptCascader from '@/components/DataSelect/DeptCascader';
-import { addUser } from '@/services/userManager';
+import { addUser, editUser } from '@/services/userManager';
 import styles from './UserForm.less';
 
 interface UserFormProps extends FormProps {
@@ -26,22 +27,26 @@ const UserForm: React.FC<UserFormProps> = ({
   ...otherProps
 }) => {
   const [form] = Form.useForm();
-  const { mutate } = useMutation((values: AddUserParams) => addUser(values), {
-    onSuccess: () => {
-      onSuccess?.();
+  const { mutate } = useMutation(
+    (values: AddUserParams) => (isEdit ? editUser(values) : addUser(values)),
+    {
+      onSuccess: () => {
+        onSuccess?.();
+      },
     },
-  });
+  );
 
   const handleFinish = useCallback(
     async (values: AddUserParams & { deptPath: string[]; roleNo: string }) => {
-      const { deptPath, roleNo, ...others } = values;
+      const { deptId, roleIds, roleNo, ...others } = values;
       // if (values.id) {
       //   delete others.userPassword;
       // }
       mutate({
         ...others,
+        roleIds: [roleIds],
         roleNoList: [roleNo],
-        deptNo: _last(deptPath),
+        deptId: _last(deptId),
       });
     },
     [mutate],
@@ -60,61 +65,30 @@ const UserForm: React.FC<UserFormProps> = ({
         <Row gutter={100}>
           <Col span={8}>
             <Form.Item
-              label="所属企业"
-              name="companyNo"
+              label="组织	"
+              name="deptId"
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: '请选择上级组织	',
+              //   },
+              // ]}
+            >
+              <DeptCascader changeOnSelect valueType="id" placeholder="请选择上级组织" />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item
+              label="角色"
+              name="roleIds"
               rules={[
                 {
                   required: true,
-                  message: '请选择所属企业',
+                  message: '请选择角色',
                 },
               ]}
             >
-              <CompanySelect onChange={handleCompanyChange} />
-            </Form.Item>
-            <Form.Item label="所属企业" name="companyType" hidden>
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col span={8}>
-            <Form.Item noStyle dependencies={['companyNo']}>
-              {({ getFieldValue }) => (
-                <Form.Item
-                  label="组织	"
-                  name="deptPath"
-                  // rules={[
-                  //   {
-                  //     required: true,
-                  //     message: '请选择上级组织	',
-                  //   },
-                  // ]}
-                >
-                  <DeptCascader
-                    changeOnSelect
-                    valueType="deptNo"
-                    companyNo={getFieldValue('companyNo')}
-                    placeholder="请选择上级组织"
-                  />
-                </Form.Item>
-              )}
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item noStyle dependencies={['companyNo']}>
-              {({ getFieldValue }) => (
-                <Form.Item
-                  label="角色"
-                  name="roleNo"
-                  rules={[
-                    {
-                      required: true,
-                      message: '请选择角色',
-                    },
-                  ]}
-                >
-                  <RoleSelect companyNo={getFieldValue('companyNo')} />
-                </Form.Item>
-              )}
+              <RoleSelect />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -126,7 +100,7 @@ const UserForm: React.FC<UserFormProps> = ({
       </Card>
       <Card className={styles.card} title="账号信息">
         <Row gutter={100}>
-          <Col span={8}>
+          {/* <Col span={8}>
             <Form.Item noStyle dependencies={['companyType']}>
               {({ getFieldValue }) => (
                 <Form.Item
@@ -143,19 +117,16 @@ const UserForm: React.FC<UserFormProps> = ({
                 </Form.Item>
               )}
             </Form.Item>
-          </Col>
+          </Col> */}
 
           <Col span={8}>
-            <Form.Item hidden name="userNo">
-              <Input placeholder="这是一个隐藏起来的表单域" />
-            </Form.Item>
-            <Form.Item hidden name="id">
+            <Form.Item hidden name="userId">
               <Input placeholder="这是一个隐藏起来的表单域" />
             </Form.Item>
 
             <Form.Item
               label="昵称"
-              name="userName"
+              name="nickName"
               rules={[
                 {
                   required: true,
@@ -169,7 +140,7 @@ const UserForm: React.FC<UserFormProps> = ({
           <Col span={8}>
             <Form.Item
               label="账号"
-              name="userAccount"
+              name="userName"
               rules={[
                 {
                   required: true,
@@ -183,13 +154,17 @@ const UserForm: React.FC<UserFormProps> = ({
           <Col span={8}>
             <Form.Item
               label="密码"
-              name="userPassword"
-              rules={[
-                {
-                  required: true,
-                  message: '请输入密码',
-                },
-              ]}
+              name="password"
+              rules={
+                isEdit
+                  ? undefined
+                  : [
+                      {
+                        required: true,
+                        message: '请输入密码',
+                      },
+                    ]
+              }
             >
               <Input.Password disabled={isEdit} maxLength={50} placeholder="请输入密码" />
             </Form.Item>
@@ -201,7 +176,7 @@ const UserForm: React.FC<UserFormProps> = ({
           <Col span={8}>
             <Form.Item
               label="邮箱"
-              name="userEmail"
+              name="email"
               // rules={[
               //   {
               //     required: true,
@@ -219,7 +194,7 @@ const UserForm: React.FC<UserFormProps> = ({
           <Col span={8}>
             <Form.Item
               label="手机号"
-              name="userMobile"
+              name="phonenumber"
               rules={[
                 {
                   required: true,
@@ -234,16 +209,16 @@ const UserForm: React.FC<UserFormProps> = ({
               <Input placeholder="请输入手机号" />
             </Form.Item>
           </Col>
-          <Col span={8}>
+          {/* <Col span={8}>
             <Form.Item label="生日" name="userBirthday">
               <DatePicker placeholder="请选择生日" allowClear style={{ width: '100%' }} />
             </Form.Item>
-          </Col>
-          {/* <Col span={8}>
-            <Form.Item label="性别" name="userSex">
-              <SexSelect placeholder="请选择性别" allowClear />
-            </Form.Item>
           </Col> */}
+          <Col span={8}>
+            <Form.Item label="性别" name="sex">
+              <DictSelect enumKey="sys_user_sex" placeholder="请选择性别" allowClear />
+            </Form.Item>
+          </Col>
         </Row>
       </Card>
     </Form>

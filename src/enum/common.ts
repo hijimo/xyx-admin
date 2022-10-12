@@ -12,8 +12,8 @@ export enum LoginTypeEnum {
   APP = 2,
 }
 export enum SexEnum {
-  MALE = 1,
-  FEMALE = 2,
+  MALE = '1',
+  FEMALE = '2',
 }
 export enum BusinessTypeEnum {
   LOGIN = 0,
@@ -38,8 +38,8 @@ export const NormalStatusDesc = {
   [NormalStatusEnum.NORMAL]: { text: '正常', status: 'Success' },
 };
 export enum SwitchEnum {
-  DISABLED = 0,
-  ENABLED,
+  DISABLED = '1',
+  ENABLED = '0',
 }
 // 禁用状态
 export const SwitchDesc = {

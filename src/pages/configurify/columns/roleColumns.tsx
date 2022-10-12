@@ -1,7 +1,7 @@
 import { SwitchDesc } from '@/enum';
 import type { ProColumns } from '@ant-design/pro-table';
 import type { RoleListItemSSD } from '@/types';
-import { key, option, companyNo, companyName } from './baseColumns';
+import { key, option, companyNo, status } from './baseColumns';
 
 const roleNo: ProColumns<RoleListItemSSD> = {
   title: '角色编号',
@@ -15,28 +15,23 @@ const roleName: ProColumns<RoleListItemSSD> = {
   className: 'nowrap',
 };
 
-const roleDescription: ProColumns<RoleListItemSSD> = {
+const remark: ProColumns<RoleListItemSSD> = {
   title: '角色描述',
-  dataIndex: 'roleDescription',
+  dataIndex: 'remark',
   className: 'nowrap',
   hideInForm: true,
   search: false,
 };
 
-export const roleStatusText: ProColumns<RoleListItemSSD> = {
-  title: '角色状态',
-  dataIndex: 'roleStatus',
-  className: 'nowrap',
-  valueEnum: SwitchDesc,
-};
+//
 
 export const roleColumns: Record<string, ProColumns<RoleListItemSSD>> = {
   key,
-  companyNo,
-  companyName,
-  roleNo,
+  // companyNo,
+  // companyName,
+  // roleNo,
   roleName,
-  roleDescription,
-  roleStatusText,
+  remark,
+  status,
   option,
 };

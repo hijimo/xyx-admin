@@ -8,7 +8,7 @@ import request from '@/utils/request';
  * @returns User[]
  */
 export async function getUserList(params: UserListParams) {
-  return request<ResponseData<PaginationData<UserSSD[]>>>('/api/user/page', {
+  return request<ResponseData<PaginationData<UserSSD[]>>>('/api/system/user/list', {
     params,
   });
 }
@@ -19,22 +19,30 @@ export async function getUserList(params: UserListParams) {
  * @returns
  */
 export async function addUser(data: AddUserParams) {
-  return request<ResponseData>('/api/user/edit', {
+  return request<ResponseData>('/api/system/user/add', {
     method: 'POST',
     data,
   });
 }
 
 /**
- * 删除用户
- * @param id number|string
+ * 编辑用户
+ * @param AddUserParams
  * @returns
  */
-export async function deleteUser(id: number | string) {
-  return request<ResponseData>('/api/user/del', {
+export async function editUser(data: AddUserParams) {
+  return request<ResponseData>('/api/system/user/edit', {
     method: 'POST',
-    data: { id },
+    data,
   });
+}
+/**
+ * 删除用户
+ * @param userId number|string
+ * @returns
+ */
+export async function deleteUser(userId: number | string) {
+  return request<ResponseData>(`/api/system/user/delete/${userId}`);
 }
 
 /**
@@ -54,19 +62,14 @@ export async function updateUserStatus(id: number | string) {
  * @param params
  * @returns User
  */
-export async function getUserInfo(id: number | string) {
-  return request<ResponseData<UserSSD>>('/api/user/info', {
-    params: { id },
-  });
+export async function getUserInfo(userId: number | string) {
+  return request<ResponseData<UserSSD>>(`/api/system/user/${userId}`);
 }
 /**
  * 重置用户密码
  * @param id
  * @returns
  */
-export async function resetUserPassword(id: number | string) {
-  return request<ResponseData>('/api/user/pwd/reset', {
-    method: 'POST',
-    data: { id },
-  });
+export async function resetUserPassword(userId: number | string) {
+  return request<ResponseData>(`/api/system/user/resetPassword/${userId}`);
 }

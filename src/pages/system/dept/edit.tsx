@@ -26,7 +26,7 @@ const EditIndex: React.FC = () => {
     enabled: !!id,
     select: (d) => d.data,
     onSuccess: (d: DeptSSD) => {
-      if (d.deptPath === null) {
+      if (d.ancestors === null) {
         setIsRootDept(true);
       }
     },
@@ -37,16 +37,18 @@ const EditIndex: React.FC = () => {
 
     const values: any = {
       ...data,
-      deptNoPath: data.deptPath?.split(','),
+      deptNoPath: data.ancestors
+        ?.split(',')
+        ?.map((i) => parseInt(i, 10))
+        .splice(1),
     };
     if (isAddChildMode) {
-      const { deptNo, deptNoPath, companyNo, id: deptId } = values;
+      const { deptNo, parentId, deptId } = values;
       return {
-        companyNo,
         deptNo,
         parentId: deptId,
-        // 顶级部门节点不存在deptNoPath
-        deptNoPath: deptNoPath ? [...deptNoPath, deptNo] : [deptNo],
+        // 顶级组织节点不存在deptNoPath
+        deptNoPath: [parentId],
       };
     }
     return values;

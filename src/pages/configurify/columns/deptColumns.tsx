@@ -4,30 +4,28 @@ import { key, option, companyName, companyNo } from './baseColumns';
 
 const deptName: ProColumns<any> = {
   title: '组织名称',
-  dataIndex: 'deptName',
+  dataIndex: 'label',
   className: 'nowrap',
 };
 
-const deptDesc: ProColumns<any> = {
-  title: '组织描述',
-  dataIndex: 'deptDesc',
-  className: 'nowrap',
-  search: false,
-};
+// const remark: ProColumns<any> = {
+//   title: '组织描述',
+//   dataIndex: 'remark',
+//   className: 'nowrap',
+//   search: false,
+// };
 
-const deptNo: ProColumns<any> = {
+const deptId: ProColumns<any> = {
   title: '组织编号',
-  dataIndex: 'deptNo',
+  dataIndex: 'id',
   className: 'nowrap',
   search: false,
 };
 
 export const deptColumns: Record<string, ProColumns<DeptSSD>> = {
-  key,
-  companyNo,
-  companyName,
-  deptNo,
+  // key,
+  // deptId,
   deptName,
-  deptDesc,
+  // remark,
   option,
 };

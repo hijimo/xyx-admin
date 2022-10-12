@@ -8,7 +8,7 @@ import request from '@/utils/request';
  * @returns RoleListItemSSD[]
  */
 export async function getRoleList(params: RoleListParams) {
-  return request<ResponseData<PaginationData<RoleListItemSSD[]>>>('/api/role/page', {
+  return request<ResponseData<PaginationData<RoleListItemSSD[]>>>('/api/system/role/list', {
     params,
   });
 }
@@ -19,34 +19,29 @@ export async function getRoleList(params: RoleListParams) {
  * @returns
  */
 export async function addRole(data: AddRoleParams) {
-  return request<ResponseData>('/api/role/edit', {
+  return request<ResponseData>('/api/system/role/add', {
     method: 'POST',
     data,
   });
 }
-
+/**
+ * 编辑角色
+ * @param AddRoleParams
+ * @returns
+ */
+export async function editRole(data: AddRoleParams) {
+  return request<ResponseData>('/api/system/role/edit', {
+    method: 'POST',
+    data,
+  });
+}
 /**
  * 删除角色
  * @param data
  * @returns
  */
-export async function deleteRole(id: number | string) {
-  return request<ResponseData>('/api/role/del', {
-    method: 'POST',
-    data: { id },
-  });
-}
-
-/**
- * 更新角色状态
- * @param data
- * @returns
- */
-export async function updateRoleStatus(id: number | string) {
-  return request<ResponseData>('/api/role/state', {
-    method: 'POST',
-    data: { id },
-  });
+export async function deleteRole(roleId: number | string) {
+  return request<ResponseData>(`/api/system/role/delete/${roleId}`);
 }
 
 /**
@@ -54,10 +49,8 @@ export async function updateRoleStatus(id: number | string) {
  * @param params
  * @returns RoleListItemSSD
  */
-export async function getRoleInfo(id: number | string) {
-  return request<ResponseData<RoleListItemSSD>>('/api/role/info', {
-    params: { id },
-  });
+export async function getRoleInfo(roleId: number | string) {
+  return request<ResponseData<RoleListItemSSD>>(`/api/system/role/${roleId}`);
 }
 
 /**
@@ -77,5 +70,5 @@ export async function getCompanyRoleList(companyNo: string) {
  * @returns
  */
 export async function getResourceList() {
-  return request<ResponseData<ResourceSSD[]>>('/api/role/resource/tree');
+  return request<ResponseData<ResourceSSD[]>>('/api/system/menu/treeselect');
 }

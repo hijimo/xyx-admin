@@ -33,7 +33,7 @@ const UserPassword = ({ onSuccess, userId }: UserPasswordProps) => {
   const initialValues = undefined;
 
   const { mutate, isLoading: uploadLoading } = useMutation(
-    (values: UpdateUserPasswordParams) => updateUserPassword({ ...values, id: userId! }),
+    (values: UpdateUserPasswordParams) => updateUserPassword({ ...values, userId }),
     {
       onSuccess: () => {
         setVisible(false);
@@ -102,18 +102,18 @@ const UserPassword = ({ onSuccess, userId }: UserPasswordProps) => {
           <Form.Item label="原密码" name="oldPassword" rules={[{ required: true }]}>
             <Input.Password placeholder="请填写原密码" />
           </Form.Item>
-          <Form.Item label="新密码" name="newPassword" rules={rules}>
+          <Form.Item label="新密码" name="password" rules={rules}>
             <Input.Password placeholder="请填写新密码" />
           </Form.Item>
           <Form.Item
             label="确认新密码"
             name="confirmPassword"
-            dependencies={['newPassword']}
+            dependencies={['password']}
             rules={[
               { ...rules[0] },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue('newPassword') === value) {
+                  if (!value || getFieldValue('password') === value) {
                     return Promise.resolve();
                   }
                   return Promise.reject(new Error('两次输入的密码不相同'));

@@ -2,7 +2,7 @@ import type { PaginationParams } from './common';
 
 export interface DeptListParams extends PaginationParams {
   /**
-   * 部门名称
+   * 组织名称
    */
   deptName?: string;
 }
@@ -52,7 +52,7 @@ export interface DeptSSD {
    */
   deptDesc: string;
   /**
-   * 部门路径id,中间用 "," 分隔
+   * 组织路径id,中间用 "," 分隔
    */
   deptPath: string;
   /**

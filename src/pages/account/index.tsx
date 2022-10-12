@@ -5,7 +5,7 @@ import { Card, List } from 'antd';
 import { PageHeaderWrapper, GridContent } from '@ant-design/pro-layout';
 import { getMyProfile } from '@/services/user';
 // import AvatarView from './components/AvatarView';
-// import UserEmail from './components/UserEmail';
+import UserEmail from './components/UserEmail';
 import UserPassword from './components/UserPassword';
 import UserPhone from './components/UserPhone';
 import UserName from './components/UserName';
@@ -19,7 +19,7 @@ const AccountIndex: React.FC = () => {
   }: any = useLocation();
 
   const { data: userInfo, refetch } = useQuery(['userInfo'], () => getMyProfile(), {
-    select: (d) => d.data,
+    select: (d) => d.data.user,
   });
 
   const handleUserInfoUpdateSuccess = useCallback(() => {
@@ -45,13 +45,13 @@ const AccountIndex: React.FC = () => {
               {/* <AvatarView data={userInfo?.userPhoto} onSuccess={handleUserInfoUpdateSuccess} /> */}
               <UserName
                 userId={userInfo?.id}
-                oldName={userInfo?.userName}
+                oldName={userInfo?.nickName}
                 onSuccess={handleUserInfoUpdateSuccess}
               />
-              <UserAccount data={userInfo?.account} />
-              {/* <UserEmail data={userInfo?.userEmail} onSuccess={handleUserInfoUpdateSuccess} /> */}
-              <UserPhone data={userInfo?.userMobile} onSuccess={handleUserInfoUpdateSuccess} />
-              <UserPassword userId={userInfo?.id} onSuccess={handlePasswordUpdateSuccess} />
+              <UserAccount data={userInfo?.userName} />
+              {/* <UserEmail data={userInfo?.mail} onSuccess={handleUserInfoUpdateSuccess} />
+              <UserPhone data={userInfo?.phone} onSuccess={handleUserInfoUpdateSuccess} /> */}
+              <UserPassword userId={userInfo?.userId} onSuccess={handlePasswordUpdateSuccess} />
             </List>
           </Card>
         </GridContent>

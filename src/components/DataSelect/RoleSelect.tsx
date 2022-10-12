@@ -7,18 +7,16 @@ import { getRoleList } from '@/services/role';
 import FilterSelect from './FilterSelect';
 import type { FilterSelectProps } from './FilterSelect';
 
-interface RoleSelectProps extends Omit<FilterSelectProps<SelectValue>, 'loading' | 'options'> {
-  freeze?: boolean;
-  companyNo?: string;
-}
+interface RoleSelectProps extends Omit<FilterSelectProps<SelectValue>, 'loading' | 'options'> {}
 
-const RoleSelect = ({ freeze = false, companyNo, ...otherProps }: RoleSelectProps) => {
+const RoleSelect = ({ ...otherProps }: RoleSelectProps) => {
   const { data, isFetching } = useQuery(
-    ['roleList', companyNo],
-    () => getRoleList({ freeze, companyNo, pageNo: 1, pageSize: 999 }),
+    ['roleList'],
+    () => getRoleList({ pageNo: 1, pageSize: 999 }),
     {
-      select: (d) => d.data.records || [],
-      enabled: !!companyNo,
+      select: (d) => {
+        return d.rows || [];
+      },
     },
   );
 
@@ -26,7 +24,7 @@ const RoleSelect = ({ freeze = false, companyNo, ...otherProps }: RoleSelectProp
     return (
       data?.map((item: RoleListItemSSD) => ({
         label: item.roleName,
-        value: item.roleNo!,
+        value: item.roleId!,
       })) ?? []
     );
   }, [data]);

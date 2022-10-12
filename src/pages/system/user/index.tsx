@@ -87,7 +87,16 @@ const UserManageIndex: React.FC = () => {
   );
   const handleResetPwd = useCallback(
     (id: number) => {
-      resetPassword(id);
+      Modal.confirm({
+        title: '重置密码确认',
+        content: '确认重置该用户密码？',
+        okText: '确认',
+        cancelText: '取消',
+        okType: 'danger',
+        onOk: () => {
+          resetPassword(id);
+        },
+      });
     },
     [resetPassword],
   );
@@ -97,24 +106,22 @@ const UserManageIndex: React.FC = () => {
   const columns = useMemo(() => {
     return _values(
       produce(tableColumns, (draft) => {
-        draft.companyNo!.hideInTable = true;
         draft.option!.render = (_, record: UserSSD) => {
           return (
             <>
-              {isAdmin(currentUser) && (
+              {/* {isAdmin(currentUser) && (
                 <>
-                  <a onClick={() => handleResetPwd(record.id)}>重置密码</a>
+                  <a onClick={() => handleResetPwd(record.userId)}>重置密码</a>
                   <Divider type="vertical" />
                 </>
-              )}
+              )} */}
+              <a onClick={() => handleResetPwd(record.userId)}>重置密码</a>
+              <Divider type="vertical" />
 
-              <Link to={`/system/user/${record.id}/edit`}>编辑</Link>
+              <Link to={`/system/user/${record.userId}/edit`}>编辑</Link>
               <Divider type="vertical" />
-              <a onClick={() => handleUpdateStatus(record.id)}>
-                {record.userStatus === 0 ? '启用' : '禁用'}
-              </a>
               <Divider type="vertical" />
-              <a onClick={() => deleteItem(record.id)}>删除</a>
+              <a onClick={() => deleteItem(record.userId)}>删除</a>
             </>
           );
         };

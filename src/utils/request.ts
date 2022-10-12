@@ -27,6 +27,7 @@ export interface PaginationData<T = any> {
   pageSize: number;
   pages: number;
   records: T;
+  rows: T;
   totalCount: number;
 }
 

@@ -71,7 +71,7 @@ export interface LogSSD extends SSDBase {
    */
   companyName: string;
   /**
-   * 部门名称
+   * 组织名称
    */
   deptName: string;
   /**

@@ -71,17 +71,14 @@ const RoleManageIndex: React.FC = () => {
   const columns = useMemo(() => {
     return _values(
       produce(tableColumns, (draft) => {
-        draft.companyNo!.hideInTable = true;
         draft.option!.render = (_, record: RoleListItemSSD) => {
           return (
             <>
-              <Link to={`/system/role/${record.id}/edit`}>编辑</Link>
+              <Link to={`/system/role/${record.roleId}/edit`}>编辑</Link>
               <Divider type="vertical" />
-              <a onClick={() => handleUpdateStatus(record.id)}>
-                {record.roleStatus === SwitchEnum.DISABLED ? '启用' : '禁用'}
-              </a>
+
               <Divider type="vertical" />
-              <a onClick={() => deleteItem(record.id)}>删除</a>
+              <a onClick={() => deleteItem(record.roleId)}>删除</a>
             </>
           );
         };
@@ -92,7 +89,7 @@ const RoleManageIndex: React.FC = () => {
   return (
     <PageContainer>
       <CommonTable
-        rowKey="id"
+        rowKey="roleId"
         actionRef={actionRef}
         request={fetchDate}
         columns={columns}

@@ -1,49 +1,40 @@
 import type { ProColumns } from '@ant-design/pro-table';
 import type { UserSSD } from '@/types';
 import { SwitchDesc, SexDesc } from '@/enum';
-import { key, option, companyNo } from './baseColumns';
+import DictSelect from '@/components/DictSelect';
+import { key, option, status } from './baseColumns';
+
+const nickName: ProColumns<UserSSD> = {
+  title: '昵称',
+  dataIndex: 'nickName',
+  className: 'nowrap',
+};
 
 const userName: ProColumns<UserSSD> = {
-  title: '昵称',
+  title: '账号',
   dataIndex: 'userName',
   className: 'nowrap',
 };
 
-const userAccount: ProColumns<UserSSD> = {
-  title: '账号',
-  dataIndex: 'userAccount',
-  className: 'nowrap',
-};
-const companyName: ProColumns<UserSSD> = {
-  title: '企业名称',
-  dataIndex: 'companyName',
-  className: 'nowrap',
-  search: false,
-};
-const userMobile: ProColumns<UserSSD> = {
+const phone: ProColumns<UserSSD> = {
   title: '手机号',
-  dataIndex: 'userMobile',
-  className: 'nowrap',
-};
-
-const userSex: ProColumns<UserSSD> = {
-  title: '性别',
-  dataIndex: 'userSex',
-  className: 'nowrap',
+  dataIndex: 'phone',
   search: false,
-  hideInTable: true,
-  valueEnum: SexDesc,
+  className: 'nowrap',
 };
 
-export const userStatusText: ProColumns<UserSSD> = {
-  title: '状态',
-  dataIndex: 'userStatus',
+const sex: ProColumns<UserSSD> = {
+  title: '性别',
+  dataIndex: 'sex',
   className: 'nowrap',
-  valueEnum: SwitchDesc,
+  hideInTable: true,
+  search: false,
+  renderFormItem: () => <DictSelect enumKey="sys_user_sex" />,
 };
-const registerSourceText: ProColumns<UserSSD> = {
-  title: '账号来源',
-  dataIndex: 'registerSourceText',
+
+const remark: ProColumns<UserSSD> = {
+  title: '备注',
+  dataIndex: 'remark',
   className: 'nowrap',
   // valueEnum: SwitchDesc,
   search: false,
@@ -51,13 +42,11 @@ const registerSourceText: ProColumns<UserSSD> = {
 
 export const userColumns: Record<string, ProColumns<UserSSD>> = {
   key,
+  nickName,
   userName,
-  userAccount,
-  userMobile,
-  companyNo,
-  companyName,
-  userSex,
-  registerSourceText,
-  userStatusText,
+  phone,
+  sex,
+  remark,
+  status,
   option,
 };

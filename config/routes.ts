@@ -15,7 +15,6 @@ export default [
         path: '/welcome',
         name: 'welcome',
         icon: 'smile',
-        hideInMenu: true,
         component: './Welcome',
       },
       {
@@ -40,6 +39,32 @@ export default [
         icon: 'setting',
         name: 'system',
         routes: [
+          {
+            path: 'dept',
+            name: 'dept',
+            icon: 'MenuOutlined',
+            routes: [
+              {
+                path: '.',
+                name: 'list',
+                hideInMenu: true,
+                component: './system/dept',
+                exact: true,
+              },
+              {
+                path: 'add',
+                name: 'add',
+                hideInMenu: true,
+                component: './system/dept/add',
+              },
+              {
+                path: ':id/edit',
+                name: 'edit',
+                hideInMenu: true,
+                component: './system/dept/edit',
+              },
+            ],
+          },
           {
             path: 'role',
             name: 'role',
@@ -203,39 +228,6 @@ export default [
           // },
         ],
       },
-      // {
-      //   // access: AuthorityMap.RESOURCE_MANAGE_LIST,
-      //   path: '/warnings',
-      //   name: 'warnings',
-      //   icon: 'MenuOutlined',
-      //   routes: [
-      //     {
-      //       path: '/warnings/index',
-      //       name: 'index',
-      //       component: './warnings',
-      //       exact: true,
-      //     },
-      //     {
-      //       path: '/warnings/rules',
-      //       name: 'rules',
-      //       component: './warnings/rules',
-      //       exact: true,
-      //     },
-      //     {
-      //       path: '/warnings/rules/add',
-      //       name: 'rulesAdd',
-      //       hideInMenu: true,
-      //       component: './warnings/rules/add',
-      //     },
-      //     {
-      //       path: '/warnings/rules/:id/edit',
-      //       name: 'rulesEdit',
-      //       hideInMenu: true,
-      //       component: './warnings/rules/edit',
-      //     },
-
-      //   ],
-      // },
       {
         // access: AuthorityMap.ACCOUNT_INFO,
         path: '/account',

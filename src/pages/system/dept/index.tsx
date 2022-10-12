@@ -9,7 +9,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ActionType } from '@ant-design/pro-table';
 import type { DeptSSD } from '@/types';
-import { getDeptList, deleteDept } from '@/services/dept';
+import { getDeptTree, deleteDept } from '@/services/dept';
 import useTableRequest from '@/hooks/useTableRequest';
 import CommonTable from '@/components/CommonTable';
 import { deptColumns } from '@/pages/configurify/columns';
@@ -51,7 +51,7 @@ const DeptIndex: React.FC = () => {
     [deletetListItem],
   );
 
-  const fetchDate = useTableRequest(getDeptList, undefined, (r) => r);
+  const fetchDate = useTableRequest(getDeptTree);
 
   const columns = useMemo(() => {
     return _values(
@@ -83,6 +83,7 @@ const DeptIndex: React.FC = () => {
     <PageContainer>
       <CommonTable
         rowKey="id"
+        search={false}
         actionRef={actionRef}
         request={fetchDate}
         columns={columns}

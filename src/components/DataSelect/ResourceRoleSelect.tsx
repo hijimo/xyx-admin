@@ -7,14 +7,14 @@ import { getResourceList } from '@/services/role';
 interface ResourceRoleSelectProps<T> extends Omit<TreeSelectProps<T>, 'treeData' | 'loading'> {}
 
 const fieldNames = {
-  label: 'resourceName',
+  label: 'label',
   value: 'id',
   children: 'children',
 };
 
 const ResourceRoleSelect = <T,>({ ...otherProps }: ResourceRoleSelectProps<T>) => {
   const { data, isLoading } = useQuery(['resourceRoleList'], () => getResourceList(), {
-    select: (d) => d.data || [],
+    select: (d) => d.data.records || [],
   });
 
   return (

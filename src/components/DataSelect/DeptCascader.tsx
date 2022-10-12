@@ -2,29 +2,23 @@ import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { Cascader } from 'antd';
 import type { CascaderProps } from 'antd/es/cascader';
-import { getDeptTreeByCompanyNo } from '@/services/dept';
+import { getDeptTree } from '@/services/dept';
 
 export interface DeptCascaderProps<DataNodeType>
   extends Omit<CascaderProps<DataNodeType>, 'options' | 'loadData'> {
-  companyNo?: string;
   valueType?: string;
 }
 
 const DeptCascader = <DataNodeType,>({
-  companyNo,
   valueType = 'id',
   ...props
 }: DeptCascaderProps<DataNodeType>) => {
-  const { data, isFetching } = useQuery(
-    ['deptCascader', companyNo],
-    () => getDeptTreeByCompanyNo(companyNo!),
-    {
-      select: (d) => d.data || [],
-      enabled: !!companyNo,
-    },
-  );
+  console.log('props.value', props.value);
+  const { data, isFetching } = useQuery(['deptCascader'], () => getDeptTree(), {
+    select: (d) => d.data.records || [],
+  });
   const fieldNames = useMemo(() => {
-    return { label: 'deptName', value: valueType };
+    return { label: 'label', value: valueType };
   }, [valueType]);
 
   return (
