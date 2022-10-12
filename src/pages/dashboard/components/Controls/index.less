@@ -1,0 +1,67 @@
+.controls {
+  position: relative;
+  height: 100%;
+
+  .space {
+    box-sizing: border-box;
+    height: 100%;
+    padding-bottom: 60px;
+    overflow-y: auto;
+  }
+  .select,
+  .input {
+    width: 100%;
+    margin-top: 6px;
+    color: #80c4ff;
+  }
+  .buttonBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 16px;
+    .button {
+      width: 100%;
+      background-color: #f08207;
+      border-color: #f08207;
+    }
+  }
+  :global {
+    .ant-select-arrow {
+      color: #80c4ff;
+    }
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      background-color: transparent;
+      border: 1px solid #2b4a7c;
+    }
+    .ant-radio-group,
+    .ant-space {
+      width: 100%;
+    }
+    .ant-radio-input:focus + .ant-radio-inner {
+      box-shadow: none;
+    }
+    .ant-radio-wrapper {
+      display: flex;
+      margin-right: 0;
+      color: #80c4ff;
+    }
+    .ant-radio-checked .ant-radio-inner {
+      border-color: rgba(49, 112, 203, 1);
+    }
+    .ant-radio-inner {
+      background-color: rgba(9, 32, 85, 1);
+      border-color: rgba(27, 48, 97, 1);
+      border-width: 2px;
+    }
+    .ant-radio-inner::after {
+      background-color: rgba(49, 112, 203, 1);
+    }
+    span.ant-radio + * {
+      display: block;
+      width: 100%;
+      padding-right: 0;
+      padding-left: 8px;
+    }
+  }
+}

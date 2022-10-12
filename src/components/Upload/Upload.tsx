@@ -106,7 +106,7 @@ const Upload: React.FC<UploadPropsExt> = ({
     if (file && file.status === FileUploadStateEnums.Initial) {
       upload();
     }
-  }, [file]);
+  }, [file, upload]);
 
   return (
     <div

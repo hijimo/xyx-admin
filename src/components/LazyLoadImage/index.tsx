@@ -122,7 +122,7 @@ const LazyLoadImage: React.FC<LazyLoadImageProps> = React.memo(
     useEffect(() => {
       init();
       return reset;
-    }, [src, srcSet, container]);
+    }, [src, srcSet, container, init]);
 
     return (
       <img

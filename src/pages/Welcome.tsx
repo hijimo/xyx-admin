@@ -4,7 +4,7 @@ import styles from './Welcome.less';
 
 const Welcome: React.FC = () => (
   <div className={styles.wrap}>
-    <Result icon={<Image src="/welcome.svg" preview={false} />} title="欢迎进入K-POST管理系统" />
+    <Result icon={<Image src="/welcome.svg" preview={false} />} title="欢迎进入通用设备管理系统" />
   </div>
 );
 

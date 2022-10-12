@@ -1,0 +1,165 @@
+@import '~antd/es/style/themes/default.less';
+@import '~@/utils/utils.less';
+.map {
+  // position: fixed;
+  // width: 100vw;
+  // height: 100vh;
+  // left: 0;
+  // top:0;
+  width: 100%;
+  height: 100%;
+  :global {
+    .BMap_bubble_pop {
+      padding: 0 !important;
+      background-color: transparent !important;
+      border: 0 !important;
+      transform: translateY(50px);
+      & > img {
+        display: none;
+      }
+      .BMap_bubble_top {
+        // display: none;
+        position: absolute;
+      }
+
+      .BMap_bubble_content {
+        width: 100% !important;
+        // height: auto!important;
+      }
+    }
+  }
+}
+
+.portalCard {
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  overflow: hidden;
+  color: #80c4ff;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  transition: top 0.35s ease, left 0.35s ease;
+  .header {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    padding: 0 32px;
+    background: #1b3f8b;
+    .deviceInfo {
+      flex: auto;
+      .name {
+        color: #fff;
+        font-weight: 600;
+        font-size: 16px;
+      }
+    }
+    .status {
+      flex: none;
+      color: #80c4ff;
+    }
+    .badge {
+      margin-left: 12px;
+    }
+  }
+  .body {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 290px;
+    overflow: hidden;
+    background: rgba(0, 34, 93, 0.8);
+    border: 1px solid;
+    border-image: linear-gradient(270deg, rgba(75, 114, 198, 0.16), rgba(147, 202, 255, 0.24)) 1 1;
+    backdrop-filter: blur(4px);
+    .title {
+      display: flex;
+      flex: none;
+      align-items: center;
+      padding: 14px 32px 14px 14px;
+      font-size: 14px;
+
+      .icon {
+        width: 0;
+        height: 0;
+        margin-right: 6px;
+        border-color: transparent transparent transparent #f08207;
+        border-style: solid;
+        border-width: 6px 0 6px 12px;
+      }
+
+      .cn {
+        flex: auto;
+        color: @text-color-inverse;
+        font-weight: 600;
+      }
+      .mode {
+      }
+    }
+    .container {
+      flex: auto;
+      margin: 0 32px 16px 32px;
+      overflow: hidden;
+    }
+    .grid {
+      height: 100%;
+      overflow-y: auto;
+      border-top: 2px solid #2b4a7c;
+      border-right: 2px solid #2b4a7c;
+      border-left: 2px solid #2b4a7c;
+      .item {
+        display: flex;
+        height: 32px;
+        color: #80c4ff;
+        font-size: 14px;
+        line-height: 32px;
+        border-bottom: 2px solid #2b4a7c;
+        .label {
+          flex: none;
+          box-sizing: border-box;
+          width: 120px;
+          height: 100%;
+          padding-left: 12px;
+          background: rgba(255, 255, 255, 0.1);
+          border-right: 2px solid #2b4a7c;
+
+          .textOverflow();
+        }
+        .value {
+          flex: auto;
+          box-sizing: border-box;
+          height: 100%;
+          padding-left: 12px;
+          .textOverflow();
+        }
+      }
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  :global {
+    .ant-descriptions-title {
+      color: #80c4ff;
+    }
+    .ant-badge-status-text {
+      color: #80c4ff;
+    }
+    .ant-descriptions-item-content,
+    .ant-descriptions-item-label {
+      color: #80c4ff;
+    }
+    .ant-card {
+      background: transparent;
+    }
+    .ant-card-body {
+      padding: 0;
+    }
+  }
+}

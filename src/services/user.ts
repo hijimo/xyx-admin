@@ -1,25 +1,50 @@
-import type { User, UserRuleMenuParams, UserRuleMenuItemSSD } from '@/types';
+import type {
+  UserSSD,
+  UserLoginData,
+  UserLoginResponseData,
+  UpdateUserPasswordParams,
+} from '@/types';
 import type { ResponseData } from '@/utils/request';
 import request from '@/utils/request';
 
 /**
  * 获取我的信息
- * @returns
+ * @returns User
  */
 export async function getMyProfile() {
-  return request<ResponseData<User>>('/api/hera/user/my_user_info/query', {
+  return request<ResponseData<UserSSD>>('/api/getInfo', {
     skipErrorHandler: true,
+    skipMiddleware: true,
   });
 }
 
-// 登出
-export async function logout() {
-  return request<ResponseData>('/api/hera/user/logout');
+/**
+ * 登录
+ * @param UserLoginData
+ * @returns UserLoginResponseData
+ */
+export async function login(data: UserLoginData) {
+  return request<ResponseData<UserLoginResponseData>>('/api/login', {
+    data,
+    method: 'POST',
+  });
 }
 
-// 获取用户的菜单
-export async function getUserRoleMenu(params?: UserRuleMenuParams) {
-  return request<ResponseData<UserRuleMenuItemSSD[]>>('/api/hera/resource/role_menu/query', {
-    params,
+/**
+ * 登出
+ * @returns
+ */
+export async function logout() {
+  return request<ResponseData>('/api/userlogin/logout');
+}
+/**
+ * 更新密码
+ * @param UpdateUserPasswordParams
+ * @returns
+ */
+export async function updateUserPassword(data: UpdateUserPasswordParams) {
+  return request<ResponseData>('/api/userlogin/changepwd', {
+    method: 'POST',
+    data,
   });
 }

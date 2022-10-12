@@ -4,6 +4,7 @@ import _isArray from 'lodash/isArray';
 import _isBoolean from 'lodash/isBoolean';
 import { Typography } from 'antd';
 import type { BaseType } from 'antd/es/typography/Base';
+import styles from './index.less';
 
 const { Text } = Typography;
 
@@ -34,7 +35,9 @@ const EmptyWrap: React.FC<EmptyWrapProps> = ({
   return (
     <>
       {prefix}
-      <Text type={type}>{value}</Text>
+      <Text className={styles.text} type={type}>
+        {value}
+      </Text>
       {suffix}
     </>
   );

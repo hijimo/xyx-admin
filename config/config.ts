@@ -49,6 +49,7 @@ export default defineConfig({
   },
   externals: {
     runtimeConfig: JSON.stringify(runtimeConfig),
+    BrowserPrint: 'window.BrowserPrint',
   },
   request: false,
   // Fast Refresh 热更新

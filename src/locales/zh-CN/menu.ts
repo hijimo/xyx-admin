@@ -1,10 +1,12 @@
 export default {
   'menu.welcome': '欢迎',
+  'menu.statisticsPanel': '仓内作业看板',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.admin': '管理页',
   'menu.admin.sub-page': '二级管理页',
   'menu.login': '登录',
+  'menu.login2': '登录',
   'menu.register': '注册',
   'menu.register-result': '注册结果',
   'menu.dashboard': 'Dashboard',
@@ -50,88 +52,28 @@ export default {
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
 
-  'menu.test': '测试',
-
-  'menu.customer': '客户',
-  'menu.provider': '服务商',
-  'menu.seller': '销售员管理',
-  'menu.seller.sellerList': '销售员列表',
-  'menu.seller.commissions': '销售佣金明细',
-  'menu.seller.comboCommissions': '佣金设置',
-
-  // 产品
-  'menu.product': '产品',
-
-  'menu.product.warehouse': '仓储',
-  'menu.product.warehouse.addWarehouse': '新增仓储',
-  'menu.product.warehouse.editWarehouse': '编辑仓储',
-
-  'menu.product.blending': '干配',
-  'menu.product.blending.addBlending': '新增干配',
-  'menu.product.blending.editBlending': '编辑干配',
-
-  'menu.product.resourceQuotation': '资源报价',
-  'menu.product.resourceQuotation.resourceQuotationDetail': '资源报价详情',
-
-  'menu.product.serviceChannel': '服务渠道',
-  'menu.product.serviceChannel.serviceChannelDetail': '服务渠道详情设置',
-  'menu.product.serviceChannel.serviceChannelQuote': '报价设置',
-  'menu.product.serviceChannel.serviceChannelQuoteList': '报价设置',
-
-  'menu.product.serviceChannel.serviceChannelMiscellaneousFeesQuoteList': '杂费报价设置',
-
-  'menu.product.routeProduct': '线路产品',
-  'menu.product.routeProduct.addRouteProduct': '新增线路产品',
-
-  'menu.product.routeProduct.routeProductDetail': '线路产品详情设置',
-  'menu.product.routeProduct.routeProductQuote': '报价设置',
-  'menu.product.routeProduct.routeProductQuoteList': '报价设置',
-
-  'menu.product.routeProduct.addRouteProductDetail': '线路产品详情',
-  'menu.product.productCombo': '线路套餐',
-
-  // 财务
-  'menu.finance': '财务',
-  'menu.finance.customer': '客户结算',
-  'menu.finance.service': '服务商结算',
-  'menu.finance.customerBill': '客户账单',
-  'menu.finance.serviceBill': '服务商账单',
-  'menu.finance.customerBillDetail': '客户计费明细',
-  'menu.finance.serviceBillDetail': '服务商计费明细',
-  'menu.finance.packageCost': '包裹成本分析',
-  'menu.finance.customerAudit': '客户费用审核',
-  'menu.finance.serviceAudit': '服务商费用审核',
-  'menu.finance.editPackageCustomer': '包裹修改客户',
-  'menu.finance.billingFailed': '计费失败记录',
-
-  // 设置
-  'menu.setting': '设置',
-  'menu.setting.basicSetting': '基础设置',
-  'menu.setting.codeSegments': '号码段配置',
-  'menu.setting.codePool': '号码池配置',
-  'menu.setting.operatingOrganizations': '运营组织机构',
-
-  // 客服
-  'menu.customerService': '客服',
-  'menu.customerService.forecast': '包裹预报',
-  'menu.customerService.package': '包裹查询',
-  'menu.customerService.packageDetail': '包裹详情',
-  'menu.customerService.packageDereliction': '无主包裹',
-  'menu.customerService.packageDerelictionDetail': '包裹详情',
-  'menu.customerService.packageTerminal': '尾程包裹',
-  'menu.customerService.packageTerminalDetail': '包裹详情',
-
-  'menu.customerService.searchPack': '装袋批次查询',
-  'menu.customerService.expressTrace': '轨迹录入',
-  'menu.customerService.feeCustomer': '客户费用录入',
-  'menu.customerService.feeProvider': '服务商费用录入',
-  'menu.customerService.abnormal': '异常处理',
-  'menu.customerService.shipmentManifest': '出货总单',
-  'menu.customerService.replaceLabel': '更换面单',
-
-  // 系统
-  'menu.system': '系统',
-  'menu.system.operationLog': '操作日志',
-  'menu.system.roleManage': '角色管理',
-  'menu.system.userManage': '用户管理',
+  'menu.system': '系统设置',
+  'menu.system.resource': '资源管理',
+  'menu.system.role': '角色管理',
+  'menu.system.role.list': '角色管理',
+  'menu.system.role.add': '创建角色',
+  'menu.system.role.edit': '角色编辑',
+  'menu.system.user': '用户管理',
+  'menu.system.user.list': '用户管理',
+  'menu.system.user.add': '创建用户',
+  'menu.system.user.edit': '用户编辑',
+  'menu.system.dict': '数据字典',
+  'menu.system.dict.list': '数据字典',
+  'menu.system.dict.add': '创建数据字典',
+  'menu.system.dict.edit': '数据字典编辑',
+  'menu.system.company': '企业管理',
+  'menu.system.company.list': '企业管理',
+  'menu.system.company.companyDetail': '企业详情',
+  'menu.system.company.add': '创建企业',
+  'menu.system.company.edit': '企业编辑',
+  'menu.system.dept': '组织管理',
+  'menu.system.dept.list': '组织管理',
+  'menu.system.dept.add': '创建组织',
+  'menu.system.dept.edit': '组织编辑',
+  'menu.system.log': '操作日志',
 };

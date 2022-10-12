@@ -1,19 +1,19 @@
 import { useCallback } from 'react';
-import type { PaginationData, ResponseData } from '@/utils/request';
-
-const transformDataToProTable = (result: ResponseData<PaginationData>) => {
+import { ResponseData } from '@/utils/request';
+const transformDataToProTable = (result: any) => {
   return {
-    data: result?.data?.records,
-    total: result?.data?.totalCount,
-    success: result?.success,
-    pageSize: result?.data?.pageSize,
-    current: result?.data?.pageNo,
+    data: result?.data?.records || result?.rows,
+    total: result?.total,
+    success: result?.code === 200,
+    pageSize: result?.pageSize,
+    current: result?.pageNo,
   };
 };
 
 const useTableRequest = (
   dataLoader?: (params: any) => Promise<any>,
   getParams?: (params: any) => any,
+  transform?: (result: ResponseData) => any,
 ) => {
   const request = useCallback(
     async (params: any) => {
@@ -24,7 +24,8 @@ const useTableRequest = (
         ...getParams?.(params),
       };
       const result: any = await dataLoader?.(newParams);
-      const transformedResult = transformDataToProTable(result);
+      const transformedResult =
+        transform?.(result) || transformDataToProTable({ ...result, ...newParams });
       return Promise.resolve(transformedResult);
     },
     [dataLoader],

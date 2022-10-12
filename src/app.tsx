@@ -3,14 +3,17 @@ import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading } from '@ant-design/pro-layout';
 import type { RunTimeLayoutConfig } from 'umi';
 import { history, Link } from 'umi';
-import type { User } from '@/types';
+import type { UserSSD } from '@/types';
 import RightContent from '@/components/RightContent';
 // import Footer from '@/components/Footer';
 // import type { ResponseData } from '@/utils/request';
 import { getAuthroityMap } from '@/utils/menu';
-import { getMyProfile, getUserRoleMenu } from './services/user';
+import { getMyProfile } from './services/user';
+import { iconfontUrl } from '@/components/Icon';
 
-// const loginPath = '/user/login';
+import 'swiper/swiper.min.css';
+
+const loginPath = '/user/login';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
@@ -22,31 +25,31 @@ export const initialStateConfig = {
  * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
-  currentUser?: User | null;
+  currentUser?: UserSSD | null;
   authorities?: Dictionary<boolean> | null;
   // fetchUserInfo?: () => Promise<ResponseData<User> | undefined>;
 }> {
-  const getUserInfo = getMyProfile();
-  const getRoleMenu = getUserRoleMenu();
-
-  let currentUser = null;
-  try {
-    const result = await getUserInfo;
-    if (result.success) {
-      currentUser = result.data;
-    }
-  } catch {
-    // history.push(loginPath);
-  }
-
+  let currentUser: UserSSD | null = null;
   let authorities: Dictionary<boolean> | null = null;
   try {
-    const result = await getRoleMenu;
-    if (result.success) {
-      authorities = getAuthroityMap(result.data);
+    if ([loginPath].includes(window.location.pathname) === false) {
+      const getUserInfo = getMyProfile();
+      // const getRoleMenu = getUserRoleMenu({ resourceType: 0 });
+
+      const result = await getUserInfo;
+      if (result.success || result.code === 200) {
+        currentUser = result.data?.user;
+
+        const { menus } = result.data || {};
+        if (menus) {
+          authorities = getAuthroityMap([...(menus || [])]);
+        }
+      }
+    } else {
+      currentUser = null;
     }
   } catch {
-    // history.push(loginPath);
+    history.push(loginPath);
   }
 
   return {
@@ -60,6 +63,7 @@ export async function getInitialState(): Promise<{
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
     rightContentRender: () => <RightContent />,
+    iconfontUrl,
     disableContentMargin: false,
     waterMarkProps: {
       content: initialState?.currentUser?.userName,

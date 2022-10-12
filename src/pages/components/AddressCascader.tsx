@@ -5,13 +5,17 @@ import type { CascaderProps } from 'antd/es/cascader';
 import { getGolbalAddressList } from '@/services/common';
 
 export interface AddressCascaderProps<DataNodeType>
-  extends Omit<CascaderProps<DataNodeType>, 'options' | 'loadData'> {}
+  extends Omit<CascaderProps<DataNodeType>, 'options' | 'loadData'> {
+  valueType?: string;
+}
 
-const fieldNames = { label: 'name', value: 'id' };
-
-const AddressCascader = <DataNodeType,>(props: AddressCascaderProps<DataNodeType>) => {
+const AddressCascader = <DataNodeType,>({
+  valueType = 'id',
+  ...props
+}: AddressCascaderProps<DataNodeType>) => {
   const [options, setOptions] = useState<DataNodeType[]>([]);
 
+  const fieldNames = { label: 'name', value: valueType };
   useEffect(() => {
     const getUnitByPid = async (pid: string | number) => {
       const response = await getGolbalAddressList({ pid });

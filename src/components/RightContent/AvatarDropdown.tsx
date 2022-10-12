@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Menu, message } from 'antd';
-import { useHistory, useModel } from 'umi';
-import runtimeConfig from 'runtimeConfig';
+import { Avatar, Menu, message, Spin } from 'antd';
+import { history, useModel, Link } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 import { logout } from '@/services/user';
@@ -28,8 +27,6 @@ const loginOut = async () => {
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   const { initialState, setInitialState } = useModel('@@initialState');
 
-  const history = useHistory();
-
   const onMenuClick = useCallback(
     (event: MenuInfo) => {
       const { key } = event;
@@ -40,18 +37,18 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       }
       history.push(`/account/${key}`);
     },
-    [setInitialState, history],
+    [setInitialState],
   );
 
   const loading = (
     <span className={`${styles.action} ${styles.account}`}>
-      {/* <Spin
+      <Spin
         size="small"
         style={{
           marginLeft: 8,
           marginRight: 8,
         }}
-      /> */}
+      />
     </span>
   );
 
@@ -89,20 +86,14 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   );
   return (
     <HeaderDropdown overlay={menuHeaderDropdown}>
-      <a
-        href={`${runtimeConfig.heraOrigin}/account?from=${window.location.href}`}
-        target="_blank"
-        rel="noreferrer"
-        className={`${styles.action} ${styles.account}`}
-      >
+      <Link to="/account" className={`${styles.action} ${styles.account}`}>
         <Avatar
-          size="small"
           className={styles.avatar}
           src={currentUser.userPhoto || '/default-avatar.png'}
           alt="avatar"
         />
         <span className={`${styles.name} anticon`}>{currentUser.userName}</span>
-      </a>
+      </Link>
     </HeaderDropdown>
   );
 };

@@ -1,0 +1,49 @@
+.portalCard {
+  position: absolute;
+  z-index: 999;
+  overflow: hidden;
+  color: #80c4ff;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  transition: top 0.35s ease, left 0.35s ease;
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px;
+    color: #fff;
+    cursor: pointer;
+  }
+  .badge {
+    margin-left: 20px;
+  }
+  .buttonBar {
+    .button {
+      width: 100%;
+      background-color: #f08207;
+      border-color: #f08207;
+    }
+  }
+
+  :global {
+    .ant-descriptions-title {
+      color: #80c4ff;
+    }
+    .ant-badge-status-text {
+      color: #80c4ff;
+    }
+    .ant-descriptions-item-content,
+    .ant-descriptions-item-label {
+      color: #80c4ff;
+    }
+    .ant-card {
+      background: transparent;
+    }
+    .ant-card-body {
+      background: rgba(0, 34, 93, 0.8);
+      border: 1px solid;
+      border-image: linear-gradient(270deg, rgba(75, 114, 198, 0.16), rgba(147, 202, 255, 0.24)) 1 1;
+      backdrop-filter: blur(4px);
+    }
+  }
+}

@@ -36,7 +36,6 @@ const usePageTab = (
 
   return {
     tabList,
-    data,
     tabKey,
     refetch,
     setTabKey,

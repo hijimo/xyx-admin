@@ -1,0 +1,33 @@
+@import '~antd/es/style/themes/default.less';
+
+.statisticsCard {
+  .body {
+    display: flex;
+    flex-direction: column;
+    .statisticsView {
+      flex: none;
+    }
+  }
+  .box {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    margin-top: 24px;
+    .charts {
+      flex: 50%;
+      height: 100%;
+      transform: translateY(25%) scale(1.3);
+    }
+    .info {
+      flex: 50%;
+      color: @text-color-inverse;
+      .title {
+        margin-bottom: 16px;
+        font-size: @font-size-lg;
+      }
+      .value {
+        font-size: @font-size-lg * 2;
+      }
+    }
+  }
+}

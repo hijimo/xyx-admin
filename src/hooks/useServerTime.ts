@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import moment from 'moment';
 import { useQuery } from 'react-query';
-import { DATE_FORMAT_FULL_TIME } from '@/utils/variables';
 import { getServerTime } from '@/services/common';
 
 const useServerTime = () => {
@@ -18,7 +17,7 @@ const useServerTime = () => {
 
   const formatTime = useMemo(() => {
     if (currentServerTime !== undefined) {
-      return moment(currentServerTime).format(DATE_FORMAT_FULL_TIME);
+      return moment(currentServerTime).format('yyyy-MM-DD HH:mm:SS');
     }
     return '';
   }, [currentServerTime]);

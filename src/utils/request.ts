@@ -3,6 +3,7 @@ import { extend } from 'umi-request';
 import type { Context } from 'umi-request';
 import { message, notification } from 'antd';
 import runtimeConfig from 'runtimeConfig';
+import { getToken } from '@/utils/ls';
 
 export enum ErrorShowType {
   SILENT = 0,
@@ -72,8 +73,8 @@ const request = extend({
       const errorInfo: ErrorInfoStructure | undefined = error.info;
 
       if (errorInfo) {
-        const errorMessage = errorInfo?.retMsg;
-        const errorCode = errorInfo?.retCode;
+        const errorMessage = errorInfo?.retMsg || errorInfo.msg;
+        const errorCode = errorInfo?.retCode || errorInfo.code;
         const errorPage = DEFAULT_ERROR_PAGE;
 
         switch (errorInfo?.showType) {
@@ -104,12 +105,12 @@ const request = extend({
             break;
         }
       } else {
-        message.error(error.message || 'Request error, please retry.');
+        message.error(error.message || error.msg || 'Request error, please retry.');
       }
     } else {
       const { response } = error;
       if (response && response.status) {
-        const errorText = codeMessage[response.status] || response.statusText;
+        const errorText = codeMessage[response.status] || response.statusText || response.msg;
         const { status, url } = response;
 
         notification.error({
@@ -141,7 +142,7 @@ request.use(async (ctx, next) => {
   const { getResponse } = options;
   const resData = getResponse ? res.data : res;
   const errorInfo: ErrorInfoStructure = { ...resData, showType: ErrorShowType.ERROR_MESSAGE };
-  if (errorInfo.success === false) {
+  if (errorInfo.success === false || errorInfo.code !== 200) {
     // 抛出错误到 errorHandler 中处理
     const error: RequestError = new Error(errorInfo.retMsg);
     error.name = 'BizError';
@@ -159,6 +160,7 @@ request.interceptors.request.use(
         headers: {
           'Accept-Language': getLocale(),
           AppNo: runtimeConfig.appNo,
+          Authorization: getToken() || '',
         },
       },
     };
@@ -169,10 +171,13 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   async (response) => {
     const data = await response.clone().json();
-    if (data.retCode === '0001007') {
-      const { loginUri, appNo } = data.data;
+    if (data.retCode === '0001007' || data.code === 401) {
+      // const { loginUri, appNo } = data.data;
+
       // 登录过期后，重新登录回到当前页面。
-      window.location.href = `${loginUri}?appNo=${appNo}&redirectUrl=${window.location.href}`;
+      if (window.location.pathname !== '/user/login') {
+        window.location.href = '/user/login';
+      }
     }
     return response;
   },

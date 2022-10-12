@@ -5,7 +5,7 @@ import type { PaginationParams, SSDBase } from './common';
  */
 export type AuthType = 1 | 2; // 1未认证 2已认证
 
-export interface User extends SSDBase {
+export interface UserSSD extends SSDBase {
   userId: string;
   /**
    * 用户名

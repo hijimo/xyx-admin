@@ -3,10 +3,10 @@ import type { MenuDataItem } from '@ant-design/pro-layout';
 import _compact from 'lodash/compact';
 import _keyBy from 'lodash/keyBy';
 import _mapValues from 'lodash/mapValues';
-import type { UserRuleMenuItemSSD, Flattenable, MapFlattenable } from '@/types';
+import type { UserMenuItemSSD, Flattenable, MapFlattenable } from '@/types';
 
 export const mapMenuToStandard = (
-  authorityData: UserRuleMenuItemSSD[],
+  authorityData: UserMenuItemSSD[],
   menuMap: Dictionary<MenuDataItem>,
 ): MenuDataItem[] =>
   _compact(

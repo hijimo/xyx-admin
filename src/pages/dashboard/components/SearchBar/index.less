@@ -1,0 +1,40 @@
+@import '~antd/es/style/themes/default.less';
+
+.search {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  color: @text-color-inverse;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #374f90;
+  border-radius: 4px;
+
+  .input {
+    flex: auto;
+    width: 90px;
+    height: 22px;
+    color: @text-color-inverse;
+    line-height: 22px;
+    background-color: transparent;
+    border: 0;
+    transition: width 0.35s ease;
+    &:focus {
+      width: 220px;
+      transition: width 0.2s ease-out;
+    }
+    &::-webkit-input-placeholder {
+      color: @text-color-inverse;
+      font-size: @font-size-lg;
+    }
+  }
+  :global {
+    .ant-input:focus,
+    .ant-input-focused {
+      box-shadow: none;
+    }
+  }
+  .icon {
+    flex: none;
+    font-size: 24px;
+  }
+}

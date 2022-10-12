@@ -1,0 +1,20 @@
+@import '~antd/es/style/themes/default.less';
+
+.card {
+  margin-bottom: 16px;
+  .list {
+    display: grid;
+    grid-row-gap: 16px;
+    grid-column-gap: 16px;
+    // grid-template-rows: repeat(3, 128px);
+    grid-template-columns: repeat(4, 1fr);
+    box-sizing: border-box;
+  }
+  .edit {
+    position: relative;
+    top: 2px;
+    margin-left: 12px;
+    color: @primary-color;
+    cursor: pointer;
+  }
+}

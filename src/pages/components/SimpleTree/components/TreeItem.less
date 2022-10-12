@@ -1,0 +1,43 @@
+@import '~antd/es/style/themes/default.less';
+
+.treeItem {
+  padding-left: 12px;
+  .treeNode {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: -28px;
+      font-size: 20px;
+      transform: translateY(-50%);
+    }
+    .title {
+      flex: auto;
+      color: #333;
+      // font-weight: 600;
+      font-size: 14px;
+    }
+    .add {
+      color: @primary-color;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+    .delete {
+      margin-left: 6px;
+      color: @primary-color;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+    :global {
+      .uc-radio {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

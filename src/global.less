@@ -1,4 +1,5 @@
 @import '~antd/es/style/themes/default.less';
+@import './css/antd/index.less';
 
 html,
 body,
@@ -17,11 +18,17 @@ body,
   left: unset;
 }
 
+.ant-card-body .ant-form {
+  overflow: hidden;
+}
 canvas {
   display: block;
 }
 
 body {
+  color: @text-color;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -31,15 +38,16 @@ ul,
 ol {
   list-style: none;
 }
-
+input::placeholder,
+textarea::placeholder {
+  font-size: 14px;
+}
 .nowrap {
   white-space: nowrap;
 }
 
-.msg-ellipsis {
-  width: 200px;
-  word-wrap: break-word;
-  word-break: break-all;
+.space-flex {
+  display: flex;
 }
 
 @media (max-width: @screen-xs) {
@@ -65,3 +73,34 @@ ol {
     min-height: 100vh;
   }
 }
+
+// ::-webkit-scrollbar {
+//   width: 6px;
+//   // background-color: green;
+// } /*滚动条整体部分*/
+
+// // ::-webkit-scrollbar-button{/*2*/}/*两端的按钮*/
+// ::-webkit-scrollbar-track {
+//   /*3*/
+//   /*外层轨道*/
+//   width: 6px;
+//   background-color: rgba(0, 0, 0, 0.1);
+//   border-radius: 4px;
+// }
+// ::-webkit-scrollbar-track-piece {
+//   /*内层滚动槽*/
+// }
+// ::-webkit-scrollbar-thumb {
+//   background-color: rgba(0, 0, 0, 0.3);
+//   /*5*/
+//   /*滑块*/
+//   &:focus {
+//     background-color: rgba(0, 0, 0, 0.6);
+//     border-radius: 4px;
+//   }
+// }
+// //  ::-webkit-scrollbar-corner{/*6*/}/*滚动条整体部分*/
+// ::-webkit-resizer {
+//   /*7*/
+//   display: none;
+// } /*右下角拖动块的样式*/

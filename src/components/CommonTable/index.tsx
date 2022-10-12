@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
-import ProTable from '@ant-design/pro-table';
-import type { SearchConfig } from '@ant-design/pro-table/es/components/Form/FormRender';
 import type { ProTableProps } from '@ant-design/pro-table';
+import type { SearchConfig } from '@ant-design/pro-table/es/components/Form/FormRender';
+import ProTable from '@ant-design/pro-table';
 
 export { default as ColumnEllipsisWrap } from './ColumnEllipsisWrap';
 
@@ -27,7 +27,6 @@ const CommonTable = <T, U extends Record<string, any> = Record<string, never>>(
       tableAlertRender={false}
       rowSelection={false}
       columnEmptyText="--"
-      revalidateOnFocus={false}
       size={size}
       onSizeChange={handleSizeChange}
       {...props}

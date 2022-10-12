@@ -9,7 +9,9 @@
 export default {
   dev: {
     '/api/': {
-      target: 'https://kadm.test.alltopbuy.com',
+      // target: 'https://apollo.jasoncui.online',
+      target: 'http://123.57.108.243:8060',
+      // target: 'http://192.168.110.242:8113',
       // target: 'http://192.168.110.240:8320',
       changeOrigin: true,
       pathRewrite: { '^': '' },

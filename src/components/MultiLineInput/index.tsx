@@ -4,6 +4,7 @@ import _compact from 'lodash/compact';
 import { Input, Modal } from 'antd';
 import type { TextAreaProps } from 'antd/es/input/TextArea';
 import { MenuOutlined } from '@ant-design/icons';
+import { legalBusinessNo } from '@/utils/pattern';
 
 interface MultiLineInputProps {
   maxLine?: number;
@@ -18,12 +19,10 @@ interface InternalTextareaProps extends TextAreaProps {
   onValueChange?: (value: string) => void;
 }
 
-const regexp = /[^A-Za-z0-9_-]+/;
-
 const textareaAutoSize = { minRows: 5, maxRows: 20 };
 
 const getMaxLineValue = (originValue?: string, maxLine?: number) => {
-  const splitedValue = originValue?.split(regexp);
+  const splitedValue = originValue?.split(legalBusinessNo);
   const compactedValue = _compact(splitedValue);
   const filteredValue = compactedValue.slice(0, maxLine);
   const value = splitedValue?.slice(-1)[0] === '' ? filteredValue.concat('') : filteredValue;

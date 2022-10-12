@@ -1,0 +1,84 @@
+// 不在全局引入字体，
+// 如果以后其他页面也使用了该字体，再跳过去使用
+@font-face {
+  font-family: 'din';
+  src: url('../../assets/fonts/DIN-Condensed-Bold-2.ttf');
+}
+
+@import '~antd/es/style/themes/default.less';
+
+.index {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(90deg, #00143a 0%, #001f59 50%, #00143a 100%);
+  // background-color: #00143a;
+  .map,
+  .grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    // z-index: -1;
+    width: 100%;
+    height: 100%;
+  }
+  .map {
+    opacity: 0.6;
+  }
+  .grid {
+    // z-index: 0;
+  }
+  .header {
+    position: absolute;
+    left: 50%;
+    height: 74px;
+    line-height: 74px;
+    transform: translateX(-50%);
+    .img {
+      width: auto;
+      height: 100%;
+    }
+    .title {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: auto;
+      height: 36px;
+      transform: translateX(-50%);
+    }
+  }
+  .center {
+    position: relative;
+    z-index: 9;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 0 528px;
+    margin-top: 90px;
+    padding: 0 36px;
+  }
+  .maps {
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    width: 1157px;
+    height: 881px !important;
+    transform: translateX(-50%);
+  }
+
+  .leftCardList,
+  .rightCardList {
+    position: fixed;
+    top: 58px;
+    bottom: 40px;
+    z-index: 999;
+    width: 488px;
+  }
+  .leftCardList {
+    left: 40px;
+  }
+  .rightCardList {
+    right: 40px;
+  }
+}

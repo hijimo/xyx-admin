@@ -1,0 +1,93 @@
+@import '~antd/es/style/themes/default.less';
+
+.card {
+  position: relative;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  height: 300px;
+  overflow: hidden;
+  // background: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid;
+  border-image: linear-gradient(270deg, rgba(27, 63, 139, 1), rgba(32, 82, 150, 1)) 1 1;
+  .mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: auto;
+    backdrop-filter: blur(4px);
+  }
+  .left,
+  .right {
+    position: absolute;
+    z-index: 9;
+    width: 13px;
+    height: 13px;
+  }
+  .left {
+    bottom: 0px;
+    left: 0px;
+  }
+  .right {
+    top: 0px;
+    right: 0px;
+  }
+
+  .cardHeader {
+    position: relative;
+    display: flex;
+    flex: none;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 23px 12px 32px;
+    line-height: 1;
+    white-space: nowrap;
+    .icon {
+      width: 0;
+      height: 0;
+      margin-right: @margin-sm;
+      border-color: transparent transparent transparent #f08207;
+      border-style: solid;
+      border-width: 6px 0 6px 12px;
+    }
+    .cn {
+      flex: auto;
+      color: @text-color-inverse;
+      font-weight: 600;
+      font-size: 20px;
+    }
+    .en {
+      margin-left: @margin-sm;
+      color: @primary-color;
+      font-size: 24px;
+      opacity: 0.6;
+    }
+    .img {
+      flex: none;
+      width: auto;
+      height: 16px;
+    }
+  }
+  .hr {
+    position: absolute;
+    right: 23px;
+    bottom: 0;
+    left: 32px;
+    margin: auto;
+    border-bottom: 1px solid;
+    border-image: radial-gradient(circle, rgba(87, 175, 255, 1), rgba(2, 109, 207, 0)) 1 1;
+
+    opacity: 0.3;
+  }
+  .cardBody {
+    flex: 1;
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: 32px;
+  }
+}

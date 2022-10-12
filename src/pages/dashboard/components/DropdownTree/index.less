@@ -1,0 +1,79 @@
+@import '~antd/es/style/themes/default.less';
+
+.dropdownTree {
+  position: relative;
+  .label {
+    color: @text-color-inverse;
+    font-size: @font-size-lg;
+    line-height: 1;
+    .icon {
+      margin-left: 8px;
+      font-size: @font-size-lg;
+    }
+  }
+  .container {
+    position: absolute;
+    width: 240px;
+    margin-top: 16px;
+    // background: #00225d;
+
+    transform: scaleY(0);
+    transform-origin: center 0%;
+    // opacity: 0.8;
+    backdrop-filter: blur(12px);
+    transition: transform 0.2s ease;
+
+    // &::before {
+    //   position: absolute;
+    //   top: -6px;
+    //   left: 30%;
+    //   z-index: -1;
+    //   display: inline-block;
+    //   width: 12px;
+    //   height: 12px;
+    //   background: #1b3f8b;
+    //   // background: linear-gradient(270deg, rgba(27, 63, 139, 1), rgba(32, 82, 150, 1)) 1 1;
+    //   border: 1px solid rgba(0, 34, 93, 0.8);
+    //   border-radius: 0 0 2px;
+    //   border-image: linear-gradient(270deg, rgba(27, 63, 139, 1), rgba(32, 82, 150, 1)) 1 1;
+    //   transform: rotate(-135deg) translateY(-0.5px);
+    //   backdrop-filter: blur(4px);
+    //   content: '';
+    //   pointer-events: none;
+    // }
+    &.show {
+      transform: scaleY(1);
+      transition: transform 0.2s ease-out;
+    }
+    .tree {
+      max-height: 50vh;
+      padding: 12px;
+      overflow-y: auto;
+      color: rgba(255, 255, 255, 0.65);
+      background-color: transparent;
+      border: 1px solid rgba(0, 34, 93, 0.8);
+      border-image: linear-gradient(270deg, rgba(27, 63, 139, 1), rgba(32, 82, 150, 1)) 1 1;
+      :global {
+        .ant-tree-switcher {
+          background: transparent;
+        }
+        .ant-tree-indent-unit::before {
+          border-color: #1b3f8b;
+        }
+        .ant-tree-switcher-noop {
+          display: none;
+        }
+        .ant-tree-node-content-wrapper.ant-tree-node-selected {
+          color: @text-color-inverse;
+          font-weight: 600;
+          background-color: transparent;
+        }
+        .ant-tree-node-content-wrapper:hover {
+          color: rgba(255, 255, 255, 0.85);
+          font-weight: 600;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

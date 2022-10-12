@@ -5,152 +5,200 @@ import type { Dictionary } from 'lodash';
 import _values from 'lodash/values';
 
 export const AuthorityMap = {
-  // 客户
-  CUSTOMER_LIST: 'CUSTOMER_LIST',
-  // 新增或编辑客户
-  MODIFY_CUSTOMER: 'MODIFY_CUSTOMER',
+  /**
+   * 企业实例
+   */
+  IOTC_HOME: 'IOTC_HOME',
+  /**
+   * 企业实例列表
+   */
+  IOTC_INDEX: 'IOTC_INDEX',
+  /**
+   * 企业实例添加
+   */
+  IOTC_ADD: 'IOTC_ADD',
+  /**
+   * 企业实例编辑
+   */
+  IOTC_EDIT: 'IOTC_EDIT',
+  /**
+   * 企业实例详情
+   */
+  IOTC_DETAIL: 'IOTC_DETAIL',
+  /**
+   * 企业实例配置
+   */
+  IOTC_CONFIG_INDEX: 'IOTC_CONFIG_INDEX',
+  /**
+   * 企业实例配置添加
+   */
+  IOTC_CONFIG_ADD: 'IOTC_CONFIG_ADD',
+  /**
+   * 企业实例配置编辑
+   */
+  IOTC_CONFIG_EDIT: 'IOTC_CONFIG_EDIT',
 
-  // 服务商
-  PROVIDER_LIST: 'PROVIDER_LIST',
-  // 新增或编辑服务商
-  MODIFY_COMPANY: 'MODIFY_COMPANY',
+  // -------------------------------------分割线---------------------------------------------------
 
-  // 销售员
-  SELLER_LIST: 'SELLER_LIST',
-  // 添加或编辑销售员
-  MODIFY_SELLER: 'MODIFY_SELLER',
-  // 销售佣金明细
-  SELLER_COMMISSIONS: 'SELLER_COMMISSIONS',
-  // 修改佣金
-  EDIT_SELLER_COMMISSIONS: 'EDIT_SELLER_COMMISSIONS',
-  // 佣金设置
-  SELLER_COMBO_COMMISSIONS: 'SELLER_COMBO_COMMISSIONS',
+  /**
+   * 通讯数据
+   */
+  DEVICE_DEAL_DATA_HOME: 'DEVICE_DEAL_DATA_HOME',
+  /**
+   * 通讯数据列表
+   */
+  DEVICE_DEAL_DATA_INDEX: 'DEVICE_DEAL_DATA_INDEX',
 
-  // 线路套餐
-  PRODUCT_COMBO_HOME: 'PRODUCT_COMBO_HOME',
+  // -------------------------------------分割线---------------------------------------------------
 
-  // 产品-服务渠道
-  SERVICE_CHANNEL_HOME: 'SERVICE_CHANNEL_HOME',
-  // 产品-服务渠道列表
-  SERVICE_CHANNEL_LIST: 'SERVICE_CHANNEL_LIST',
-  // 产品-服务渠道详情
-  SERVICE_CHANNEL_DETAIL: 'SERVICE_CHANNEL_DETAIL',
-  // 产品-服务渠道报价
-  SERVICE_CHANNEL_QUOTE: 'SERVICE_CHANNEL_QUOTE',
+  /**
+   * 物模型
+   */
+  DEVICE_MODEL_HOME: 'DEVICE_MODEL_HOME',
+  /**
+   * 物模型列表
+   */
+  DEVICE_MODEL_INDEX: 'DEVICE_MODEL_INDEX',
 
-  // 产品-线路产品
-  PRODUCT_LINE_HOME: 'PRODUCT_LINE_HOME',
-  // 产品-线路产品列表
-  PRODUCT_LINE_LIST: 'PRODUCT_LINE_LIST',
-  // 产品-线路产品报价
-  PRODUCT_LINE_QUOTE: 'PRODUCT_LINE_QUOTE',
-  // 产品-线路产品详情
-  PRODUCT_LINE_DETAIL: 'PRODUCT_LINE_DETAIL',
+  // -------------------------------------分割线---------------------------------------------------
 
-  // 客服
-  CUSTOMER_SERVICE_HOME: 'CUSTOMER_SERVICE_HOME',
-  // 客服-包裹预报
-  CUSTOMER_SERVICE_FORECAST: 'CUSTOMER_SERVICE_FORECAST',
-  // 客服-包裹查询
-  CUSTOMER_SERVICE_PACKAGE: 'CUSTOMER_SERVICE_PACKAGE',
-  // 客服-包裹查询详情
-  CUSTOMER_SERVICE_PACKAGE_DETAIL: 'CUSTOMER_SERVICE_PACKAGE_DETAIL',
-  // 无主包裹
-  CUSTOMER_SERVICE_DERELICTION: 'CUSTOMER_SERVICE_DERELICTION',
-  // 无主包裹详情
-  CUSTOMER_SERVICE_DERELICTION_DETAIL: 'CUSTOMER_SERVICE_DERELICTION_DETAIL',
-  // 尾程包裹
-  CUSTOMER_SERVICE_PACKAGE_TERMINAL: 'CUSTOMER_SERVICE_PACKAGE_TERMINAL',
-  // 尾程包裹详情
-  CUSTOMER_SERVICE_PACKAGE_TERMINAL_DETAIL: 'CUSTOMER_SERVICE_PACKAGE_TERMINAL_DETAIL',
-  // 客服-装袋批次
-  CUSTOMER_SERVICE_SEARCHPACK: 'CUSTOMER_SERVICE_SEARCHPACK',
-  // 客服-轨迹录入
-  CUSTOMER_SERVICE_EXPRESS_TRACE: 'CUSTOMER_SERVICE_EXPRESS_TRACE',
-  // 客服-客户费用录入
-  CUSTOMER_SERVICE_CUSTOMER_FEE_TRACE: 'CUSTOMER_SERVICE_CUSTOMER_FEE_TRACE',
-  // 客服-服务商费用录入
-  CUSTOMER_SERVICE_PROVIDER_FEE_TRACE: 'CUSTOMER_SERVICE_PROVIDER_FEE_TRACE',
-  // 客服-异常处理
-  CUSTOMER_SERVICE_ABNORMAL: 'CUSTOMER_SERVICE_ABNORMAL',
-  // 客服-出货总单
-  CUSTOMER_SERVICE_MANIFEST_SHIPMENT: 'CUSTOMER_SERVICE_MANIFEST_SHIPMENT',
-  // 客服-出货总单
-  CUSTOMER_SERVICE_REPLACE_LABEL: 'CUSTOMER_SERVICE_REPLACE_LABEL',
+  /**
+   * 设备分组
+   */
+  DEVICE_GROUP_HOME: 'DEVICE_GROUP_HOME',
+  /**
+   * 设备分组列表
+   */
+  DEVICE_GROUP_INDEX: 'DEVICE_GROUP_INDEX',
+  /**
+   * 设备分组添加
+   */
+  DEVICE_GROUP_ADD: 'DEVICE_GROUP_ADD',
+  /**
+   * 设备分组编辑
+   */
+  DEVICE_GROUP_EDIT: 'DEVICE_GROUP_EDIT',
 
-  // 财务
-  FINANCE_HOME: 'FINANCE_HOME',
-  // 财务-客户计费明细
-  FINANCE_CUSTOMER_BILL_DETAIL: 'FINANCE_CUSTOMER_BILL_DETAIL',
-  // 财务-服务商计费明细
-  FINANCE_SERVICE_BILL_DETAIL: 'FINANCE_SERVICE_BILL_DETAIL',
-  // 财务-客户账单
-  FINANCE_CUSTOMER_BILL: 'FINANCE_CUSTOMER_BILL',
-  // 财务-服务商账单
-  FINANCE_SERVICE_BILL: 'FINANCE_SERVICE_BILL',
-  // 财务-包裹成本分析
-  FINANCE_COST_PACKAGE: 'FINANCE_COST_PACKAGE',
-  // 财务-客户费用审核
-  FINANCE_CUSTOMER_AUDIT: 'FINANCE_CUSTOMER_AUDIT',
-  // 财务-服务商费用审核
-  FINANCE_SERVICE_AUDIT: 'FINANCE_SERVICE_AUDIT',
-  // 财务-包裹修改客户
-  FINANCE_PACKAGE_CUSTOMER_EDIT: 'FINANCE_PACKAGE_CUSTOMER_EDIT',
-  // 财务-计费失败记录
-  BILLING_FAILED_LIST: 'BILLING_FAILED_LIST',
+  // -------------------------------------分割线---------------------------------------------------
 
-  // 设置
-  SETTING_HOME: 'SETTING_HOME',
-  // 设置-基础设置
-  SETTING_BASE: 'SETTING_BASE',
-  // 设置-号码段配置
-  SETTING_CODE_SEGMENTS: 'SETTING_CODE_SEGMENTS',
-  // 设置-号码池配置
-  SETTING_CODE_POOL: 'SETTING_CODE_POOL',
-  // 设置-运营组织机构
-  SETTING_OPERATING_ORGANIZATIONS: 'SETTING_OPERATING_ORGANIZATIONS',
+  /**
+   * 设备管理
+   */
+  DEVICE_HOME: 'DEVICE_HOME',
+  /**
+   * 设备管理列表
+   */
+  DEVICE_INDEX: 'DEVICE_INDEX',
+  /**
+   * 设备详情
+   */
+  DEVICE_DETAIL: 'DEVICE_DETAIL',
 
-  // 系统
-  SYSTEM: 'SYSTEM',
-  // 操作日志
-  SYSTEM_OPERATION_LOG_HOME: 'SYSTEM_OPERATION_LOG_HOME',
-  // 角色管理
-  SYSTEM_ROLE_MANAGE: 'SYSTEM_ROLE_MANAGE',
-  // 用户管理
-  SYSTEM_USER_MANAGE: 'SYSTEM_USER_MANAGE',
+  // -------------------------------------分割线---------------------------------------------------
 
-  // 产品-仓储
-  PRODUCT_WAREHOUSE_LIST: 'PRODUCT_WAREHOUSE_LIST',
+  /**
+   * 角色
+   */
+  ROLE_HOME: 'ROLE_HOME',
+  /**
+   * 角色列表
+   */
+  ROLE_INDEX: 'ROLE_INDEX',
+  /**
+   * 角色添加
+   */
+  ROLE_ADD: 'ROLE_ADD',
+  /**
+   * 角色编辑
+   */
+  ROLE_EDIT: 'ROLE_EDIT',
 
-  // 产品-干配/承运商
-  PRODUCT_CARRIER_LIST: 'PRODUCT_CARRIER_LIST',
+  // -------------------------------------分割线---------------------------------------------------
 
-  // 产品-资源报价
-  PRODUCT_RESOURCE_INQUIRY_LIST: 'PRODUCT_RESOURCE_INQUIRY_LIST',
+  /**
+   * 用户
+   */
+  USER_HOME: 'USER_HOME',
+  /**
+   * 用户列表
+   */
+  USER_INDEX: 'USER_INDEX',
+  /**
+   * 用户添加
+   */
+  USER_ADD: 'USER_ADD',
+  /**
+   * 用户编辑
+   */
+  USER_EDIT: 'USER_EDIT',
 
-  // 结算-客户结算
-  SETTLEMENT_CUSTOMER_LIST: 'SETTLEMENT_CUSTOMER_LIST',
+  // -------------------------------------分割线---------------------------------------------------
 
-  // 结算-服务商结算
-  SETTLEMENT_PROVIDER_LIST: 'SETTLEMENT_PROVIDER_LIST',
-} as const;
+  /**
+   * 企业
+   */
+  COMPANY_HOME: 'COMPANY_HOME',
+  /**
+   * 企业列表
+   */
+  COMPANY_INDEX: 'COMPANY_INDEX',
+  /**
+   * 企业添加
+   */
+  COMPANY_ADD: 'COMPANY_ADD',
+  /**
+   * 企业编辑
+   */
+  COMPANY_EDIT: 'COMPANY_EDIT',
+  /**
+   * 企业详情
+   */
+  COMPANY_DETAIL: 'COMPANY_DETAIL',
+
+  // -------------------------------------分割线---------------------------------------------------
+
+  /**
+   * 部门
+   * */
+  DEPT_HOME: 'DEPT_HOME',
+  /**
+   * 部门列表
+   */
+  DEPT_INDEX: 'DEPT_INDEX',
+  /**
+   * 部门添加
+   */
+  DEPT_ADD: 'DEPT_ADD',
+  /**
+   * 部门编辑
+   */
+  DEPT_EDIT: 'DEPT_EDIT',
+
+  // -------------------------------------分割线---------------------------------------------------
+
+  /**
+   * 操作日志
+   */
+  LOG_HOME: 'LOG_HOME',
+  /**
+   * 操作日志列表
+   */
+  LOG_INDEX: 'LOG_INDEX',
+};
 
 const allAuthorities = _values(AuthorityMap);
 
-const defaultAuthorities = {};
-
 export default function access(initialState: { authorities?: Dictionary<boolean> }) {
   const { authorities } = initialState || {};
-
-  const testAuthorities = process.env.NODE_ENV === 'development' ? defaultAuthorities : {};
 
   const finalAuthorities = allAuthorities.reduce((memo, auth) => {
     memo[auth] = authorities?.[auth] ?? false;
     return memo;
   }, {});
 
+  console.log('finalAuthorities', finalAuthorities);
+
   return {
     ...finalAuthorities,
-    ...testAuthorities,
   };
 }
