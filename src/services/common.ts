@@ -5,7 +5,7 @@ import type { NormalStatusEnum, BusinessTypeEnum } from '@/enum';
 
 // 获取阿里云OSS的上传token
 export async function getOssSign() {
-  return request('/api/wms/common/oss_token/query');
+  return request('/api/oss/token');
 }
 
 /**

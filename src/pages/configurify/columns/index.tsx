@@ -9,3 +9,4 @@ export * from './warningsColumns';
 export * from './deviceColumns';
 export * from './deviceGroupColumns';
 export * from './deviceDealDataColumns';
+export * from './bannerColumns';

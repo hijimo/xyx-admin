@@ -33,6 +33,32 @@ export default [
           },
         ],
       },
+      {
+        path: '/banner',
+        name: 'banner',
+        icon: 'MenuOutlined',
+        routes: [
+          {
+            path: '.',
+            name: 'list',
+            hideInMenu: true,
+            component: './banner',
+            exact: true,
+          },
+          {
+            path: 'add',
+            name: 'add',
+            hideInMenu: true,
+            component: './banner/add',
+          },
+          {
+            path: ':id/edit',
+            name: 'edit',
+            hideInMenu: true,
+            component: './banner/edit',
+          },
+        ],
+      },
 
       {
         path: '/system',

@@ -29,6 +29,15 @@ interface UploadPropsExt extends UploadProps {
   file: File;
 }
 
+const appendParams = (url: string, params: any) => {
+  const u = new URL(url);
+
+  Object.keys(params).map((k) => {
+    u.searchParams.append(k, params[k]);
+  });
+  return u.href;
+};
+
 const getThumUrl = (file: File) => {
   const { name, url } = file;
   let thumbUrl = '';
@@ -38,10 +47,14 @@ const getThumUrl = (file: File) => {
     if (file.tmpUrl) {
       thumbUrl = file.tmpUrl;
     } else {
-      thumbUrl = `${url}?x-oss-process=image/resize,m_mfit,h_100`;
+      thumbUrl = appendParams(url, {
+        'x-oss-process': 'image/resize,m_mfit,h_100',
+      });
     }
   } else if (isVideo(filename)) {
-    thumbUrl = `${url}?x-oss-process=video/snapshot,t_0,f_jpg,w_100,h_100,m_fast`;
+    thumbUrl = appendParams(url, {
+      'x-oss-process': 'video/snapshot,t_0,f_jpg,w_100,h_100,m_fast',
+    });
   } else {
     thumbUrl = getFileIcon(name);
   }

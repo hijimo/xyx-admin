@@ -52,9 +52,9 @@ class Uploader {
     }
 
     try {
-      const { success, data } = await getOssSign();
+      const { success, code, data } = await getOssSign();
 
-      if (success) {
+      if (success || code === 200) {
         data.creator = Math.floor(new Date().valueOf() / 1000);
         setUploadSign(data);
         return data;
@@ -133,6 +133,7 @@ class Uploader {
     const key = genKey(dir, file.name);
     const oss = {
       OSSAccessKeyId,
+      accessKeyId: OSSAccessKeyId,
       success_action_status: '200',
       policy,
       signature,

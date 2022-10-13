@@ -50,7 +50,15 @@ export function genUniqueFileName(filename = '') {
 export function getExtname(filename = '') {
   if (!filename) return '';
 
-  const names = filename.split('.');
+  let names = [];
+  // http地址
+  if (filename.includes('http')) {
+    const u = new URL(filename);
+    names = u.pathname.split('.');
+  } else {
+    // 普通文件名
+    names = filename.split('.');
+  }
 
   return `.${names[names.length - 1].toLowerCase()}`;
 }

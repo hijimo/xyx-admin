@@ -51,7 +51,10 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
-
+  'menu.banner': 'Banner管理',
+  'menu.banner.list': 'Banner管理',
+  'menu.banner.add': '添加Banner',
+  'menu.banner.edit': 'Banner编辑',
   'menu.system': '系统设置',
   'menu.system.resource': '资源管理',
   'menu.system.role': '角色管理',
