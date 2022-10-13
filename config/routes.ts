@@ -60,6 +60,32 @@ export default [
         ],
       },
       {
+        path: '/strategy',
+        name: 'strategy',
+        icon: 'MenuOutlined',
+        routes: [
+          {
+            path: '.',
+            name: 'list',
+            hideInMenu: true,
+            component: './strategy',
+            exact: true,
+          },
+          {
+            path: 'add',
+            name: 'add',
+            hideInMenu: true,
+            component: './strategy/add',
+          },
+          {
+            path: ':id/edit',
+            name: 'edit',
+            hideInMenu: true,
+            component: './strategy/edit',
+          },
+        ],
+      },
+      {
         path: '/figure',
         name: 'figure',
         icon: 'MenuOutlined',

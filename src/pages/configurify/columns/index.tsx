@@ -11,3 +11,4 @@ export * from './deviceGroupColumns';
 export * from './deviceDealDataColumns';
 export * from './bannerColumns';
 export * from './figureColumns';
+export * from './strategyColumns';

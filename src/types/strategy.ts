@@ -2,6 +2,8 @@ import { BooleanEnum } from '@/enum';
 import type { PaginationParams, SSDBase } from './common';
 
 export interface StrategyListParams extends PaginationParams {}
+
+export interface AddStrategyParams {}
 export interface StrategySSD extends SSDBase {
   /**
    * id
@@ -10,7 +12,7 @@ export interface StrategySSD extends SSDBase {
   /**
    * 攻略主题
    */
-  strategyTtitle: string;
+  strategyTitle: string;
   /**
    * 背景介绍
    */
