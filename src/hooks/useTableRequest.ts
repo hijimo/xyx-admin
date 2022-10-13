@@ -6,6 +6,7 @@ const transformDataToProTable = (result: any) => {
     total: result?.total,
     success: result?.code === 200,
     pageSize: result?.pageSize,
+    pageNum: result?.pageNo,
     current: result?.pageNo,
   };
 };
@@ -21,6 +22,7 @@ const useTableRequest = (
         ...params,
         current: undefined,
         pageNo: params.current,
+        pageNum: params.current,
         ...getParams?.(params),
       };
       const result: any = await dataLoader?.(newParams);

@@ -59,7 +59,32 @@ export default [
           },
         ],
       },
-
+      {
+        path: '/figure',
+        name: 'figure',
+        icon: 'MenuOutlined',
+        routes: [
+          {
+            path: '.',
+            name: 'list',
+            hideInMenu: true,
+            component: './figure',
+            exact: true,
+          },
+          {
+            path: 'add',
+            name: 'add',
+            hideInMenu: true,
+            component: './figure/add',
+          },
+          {
+            path: ':id/edit',
+            name: 'edit',
+            hideInMenu: true,
+            component: './figure/edit',
+          },
+        ],
+      },
       {
         path: '/system',
         icon: 'setting',

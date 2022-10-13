@@ -10,3 +10,4 @@ export * from './user';
 export * from './question';
 export * from './role';
 export * from './resource';
+export * from './figure';

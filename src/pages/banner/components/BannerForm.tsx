@@ -53,7 +53,7 @@ const BannerForm: React.FC<BannerFormProps> = ({
               label="Banner图"
               name="bannerPath"
               valuePropName="fileList"
-              rules={[{ required: true, message: '请上传营业执照' }]}
+              rules={[{ required: true, message: '请上传Banner图' }]}
             >
               <Upload maxLength={1}>
                 <PlusOutlined /> 上传

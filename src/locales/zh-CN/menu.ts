@@ -55,6 +55,11 @@ export default {
   'menu.banner.list': 'Banner管理',
   'menu.banner.add': '添加Banner',
   'menu.banner.edit': 'Banner编辑',
+  'menu.figure': '角色管理',
+  'menu.figure.list': '角色管理',
+  'menu.figure.add': '添加角色',
+  'menu.figure.edit': '角色编辑',
+
   'menu.system': '系统设置',
   'menu.system.resource': '资源管理',
   'menu.system.role': '角色管理',
