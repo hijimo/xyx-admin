@@ -1,3 +1,25 @@
+export enum ConfigTypeEnum {
+  /**
+   * 背景音乐
+   */
+  AUDIO = 'background_audio',
+  /**
+   * 背景图片
+   */
+  IMAGE = 'background_image',
+  /**
+   * 终极宝箱
+   */
+  FIANL_REWARD = 'final_reward',
+  /**
+   * 礼物
+   */
+  REWARD = 'reward',
+  /**
+   * 将项策略
+   */
+  REWARD_STRATEGY = 'reward_strategy',
+}
 export enum BooleanEnum {
   FALSE = 0,
   TRUE,

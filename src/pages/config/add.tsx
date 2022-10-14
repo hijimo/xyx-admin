@@ -1,17 +1,28 @@
 import React, { useRef, useCallback } from 'react';
 import { Button, message } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
-import { useHistory } from 'umi';
+import { useHistory, useParams } from 'umi';
 import type { FormInstance } from 'antd/es/form';
-import type { AddStrategyParams } from '@/types';
-import StrategyForm from './components/StrategyForm';
+import type { DictAddParams } from '@/types';
+import ConfigForm from './components/ConfigForm';
+import { ConfigTypeEnum } from '@/enum';
+
+const urls_map = {
+  [ConfigTypeEnum.AUDIO]: '/config/audio',
+  [ConfigTypeEnum.IMAGE]: '/config/image',
+  [ConfigTypeEnum.REWARD]: '/config/reward',
+  [ConfigTypeEnum.REWARD_STRATEGY]: '/config/strategy',
+  [ConfigTypeEnum.FIANL_REWARD]: '/config/final',
+};
 const AddIndex: React.FC = () => {
-  const formRef = useRef<FormInstance<AddStrategyParams>>(null);
+  const formRef = useRef<FormInstance<DictAddParams>>(null);
   const history = useHistory();
+
+  const { type } = useParams() || {};
 
   const handleSuccess = useCallback(() => {
     message.success('添加成功');
-    history.replace('/strategy');
+    history.replace(urls_map[type]);
   }, [history]);
 
   const handleCancel = useCallback(() => {
@@ -33,7 +44,7 @@ const AddIndex: React.FC = () => {
         </Button>,
       ]}
     >
-      <StrategyForm formRef={formRef} onSuccess={handleSuccess} />
+      <ConfigForm type={type} formRef={formRef} onSuccess={handleSuccess} />
     </PageContainer>
   );
 };

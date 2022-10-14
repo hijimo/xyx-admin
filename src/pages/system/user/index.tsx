@@ -4,8 +4,7 @@ import { produce } from 'immer';
 import { useMutation } from 'react-query';
 import { useModel } from 'umi';
 
-import { Link } from 'umi';
-import { useHistory } from 'umi';
+import { Link, useHistory } from 'umi';
 import { Button, Divider, Modal, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';

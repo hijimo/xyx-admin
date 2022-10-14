@@ -6,39 +6,46 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { useHistory, useParams } from 'umi';
 import { useQuery, useQueryClient } from 'react-query';
 import type { FormInstance } from 'antd/es/form';
-import type { AddStrategyParams } from '@/types';
-import { getStrategyInfo } from '@/services/strategy';
-import StrategyForm from './components/StrategyForm';
+import type { DictAddParams } from '@/types';
+import { getDictItemByCode } from '@/services/dict';
+import { ConfigTypeEnum } from '@/enum';
+import ConfigForm from './components/ConfigForm';
 
+const urls_map = {
+  [ConfigTypeEnum.AUDIO]: '/config/audio',
+  [ConfigTypeEnum.IMAGE]: '/config/image',
+  [ConfigTypeEnum.REWARD]: '/config/reward',
+  [ConfigTypeEnum.REWARD_STRATEGY]: '/config/strategy',
+  [ConfigTypeEnum.FIANL_REWARD]: '/config/final',
+};
 const EditIndex: React.FC = () => {
-  const formRef = useRef<FormInstance<AddStrategyParams>>(null);
+  const formRef = useRef<FormInstance<DictAddParams>>(null);
   const history = useHistory();
   const queryClient = useQueryClient();
-  const { id }: { id: string } = useParams();
+  const { id, type }: { id: string; type: ConfigTypeEnum } = useParams();
 
-  const { data } = useQuery(['getStrategyInfo', id], () => getStrategyInfo(id), {
+  const { data } = useQuery(['getDictItemByCode', id], () => getDictItemByCode(id), {
     enabled: !!id,
     select: (d) => d.data,
   });
 
   const initialValues = useMemo(() => {
     if (!data) return undefined;
+
+    const { dictValue, ...others } = data;
+
+    const info = JSON.parse(dictValue);
     const values: any = {
-      ...data,
-      bannerPath: [
-        {
-          uid: new Date().valueOf(),
-          url: data.bannerPath,
-        },
-      ],
+      ...others,
+      ...info,
     };
     return values;
   }, [data]);
 
   const handleSuccess = useCallback(() => {
     message.success('操作成功');
-    queryClient.invalidateQueries(['getStrategyInfo', id]);
-    history.replace('/strategy');
+    queryClient.invalidateQueries(['getDictItemByCode', id]);
+    history.replace(urls_map[type]);
   }, [history]);
 
   const handleCancel = useCallback(() => {
@@ -62,8 +69,9 @@ const EditIndex: React.FC = () => {
     >
       <Card>
         {initialValues !== undefined && (
-          <StrategyForm
+          <ConfigForm
             isEdit
+            type={type}
             formRef={formRef}
             onSuccess={handleSuccess}
             initialValues={initialValues}

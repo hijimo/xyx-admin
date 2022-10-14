@@ -112,6 +112,143 @@ export default [
         ],
       },
       {
+        path: '/config',
+        icon: 'setting',
+        name: 'config',
+        routes: [
+          {
+            path: 'audio',
+            name: 'audio',
+            icon: 'MenuOutlined',
+            routes: [
+              {
+                path: '.',
+                name: 'list',
+                hideInMenu: true,
+                component: './config/audio',
+                exact: true,
+              },
+              {
+                path: ':type/add',
+                name: 'add',
+                hideInMenu: true,
+                component: './config/add',
+              },
+              {
+                path: ':type/:id/edit',
+                name: 'edit',
+                hideInMenu: true,
+                component: './config/edit',
+              },
+            ],
+          },
+          {
+            path: 'image',
+            name: 'image',
+            icon: 'MenuOutlined',
+            routes: [
+              {
+                path: '.',
+                name: 'list',
+                hideInMenu: true,
+                component: './config/image',
+                exact: true,
+              },
+              {
+                path: ':type/add',
+                name: 'add',
+                hideInMenu: true,
+                component: './config/add',
+              },
+              {
+                path: ':type/:id/edit',
+                name: 'edit',
+                hideInMenu: true,
+                component: './config/edit',
+              },
+            ],
+          },
+          {
+            path: 'reward',
+            name: 'reward',
+            icon: 'MenuOutlined',
+            routes: [
+              {
+                path: '.',
+                name: 'list',
+                hideInMenu: true,
+                component: './config/reward',
+                exact: true,
+              },
+              {
+                path: ':type/add',
+                name: 'add',
+                hideInMenu: true,
+                component: './config/add',
+              },
+              {
+                path: ':type/:id/edit',
+                name: 'edit',
+                hideInMenu: true,
+                component: './config/edit',
+              },
+            ],
+          },
+          {
+            path: 'strategy',
+            name: 'strategy',
+            icon: 'MenuOutlined',
+            routes: [
+              {
+                path: '.',
+                name: 'list',
+                hideInMenu: true,
+                component: './config/strategy',
+                exact: true,
+              },
+              {
+                path: ':type/add',
+                name: 'add',
+                hideInMenu: true,
+                component: './config/add',
+              },
+              {
+                path: ':type/:id/edit',
+                name: 'edit',
+                hideInMenu: true,
+                component: './config/edit',
+              },
+            ],
+          },
+          {
+            path: 'final',
+            name: 'final',
+            icon: 'MenuOutlined',
+            routes: [
+              {
+                path: '.',
+                name: 'list',
+                hideInMenu: true,
+                component: './config/final',
+                exact: true,
+              },
+              {
+                path: ':type/add',
+                name: 'add',
+                hideInMenu: true,
+                component: './config/add',
+              },
+              {
+                path: ':type/:id/edit',
+                name: 'edit',
+                hideInMenu: true,
+                component: './config/edit',
+              },
+            ],
+          },
+        ],
+      },
+      {
         path: '/system',
         icon: 'setting',
         name: 'system',
