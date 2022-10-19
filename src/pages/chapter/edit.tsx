@@ -9,6 +9,7 @@ import type { FormInstance } from 'antd/es/form';
 import type { AddChapterParams } from '@/types';
 import { getChapterInfo } from '@/services/chapter';
 import ChapterForm from './components/ChapterForm';
+import { BooleanEnum } from '@/enum';
 
 const EditIndex: React.FC = () => {
   const formRef = useRef<FormInstance<AddChapterParams>>(null);
@@ -27,6 +28,19 @@ const EditIndex: React.FC = () => {
     const values: any = {
       ...data,
       filesJson: JSON.parse(filesJson),
+      questions: questions.map((it) => {
+        const r = {
+          ...it,
+          gameRoleId: it.roles.map((r) => r.gameRoleId),
+        };
+        it.options.forEach((o, idx) => {
+          r[`optionContent${idx + 1}`] = o.optionContent;
+          r[`optionId${idx + 1}`] = o.optionId;
+          r[`optionCorrect${idx + 1}`] = o.optionCorrect === BooleanEnum.TRUE;
+        });
+
+        return r;
+      }),
     };
     return values;
   }, [data]);

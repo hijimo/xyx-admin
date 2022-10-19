@@ -35,6 +35,13 @@ const QuestionFormList: React.FC<QuestionFormListProps> = ({ form, ...props }) =
                 <Row gutter={100}>
                   {/* 占位符 */}
                   <Col span={8}>
+                    <Form.Item hidden {...field} name={[field.name, 'questionId']}>
+                      <Input />
+                    </Form.Item>
+                    <Form.Item hidden {...field} name={[field.name, 'chapterId']}>
+                      <Input />
+                    </Form.Item>
+
                     <Form.Item
                       label="角色"
                       rules={[
@@ -53,8 +60,8 @@ const QuestionFormList: React.FC<QuestionFormListProps> = ({ form, ...props }) =
                     <Form.Item
                       label="线索"
                       {...field}
-                      key={[field.name, 'clue'].join('.')}
-                      name={[field.name, 'clue']}
+                      key={[field.name, 'questionClue'].join('.')}
+                      name={[field.name, 'questionClue']}
                       rules={[
                         {
                           required: true,

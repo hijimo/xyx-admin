@@ -35,8 +35,6 @@ const ChapterForm: React.FC<ChapterFormProps> = ({
 
   const handleFinish = useCallback(
     async (values: AddChapterParams) => {
-      debugger;
-
       const { questions, filesJson } = values;
       mutate({
         ...values,
@@ -45,6 +43,11 @@ const ChapterForm: React.FC<ChapterFormProps> = ({
         questions: questions.map((q) => {
           return {
             ...q,
+            roles: [
+              {
+                gameRoleId: q.gameRoleId,
+              },
+            ],
             options: new Array(4).fill(1).map((i, idx) => {
               return {
                 optionContent: q[`optionContent${idx + 1}`],
