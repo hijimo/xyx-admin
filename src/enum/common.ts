@@ -19,6 +19,10 @@ export enum ConfigTypeEnum {
    * 将项策略
    */
   REWARD_STRATEGY = 'reward_strategy',
+  /**
+   * 时效
+   */
+  TIME_LIMIT = 'strategy_time_limit',
 }
 export enum BooleanEnum {
   FALSE = 0,

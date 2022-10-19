@@ -2,21 +2,23 @@ import React, { useRef, useMemo, useCallback } from 'react';
 import _values from 'lodash/values';
 import { produce } from 'immer';
 import { useMutation } from 'react-query';
-
-import { Link } from 'umi';
-import { useHistory } from 'umi';
+import { Link, useParams, useHistory } from 'umi';
 import { Button, Divider, Modal, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ActionType } from '@ant-design/pro-table';
-import { getStrategyList, deleteStrategy } from '@/services/strategy';
+import type { DictItemSSD } from '@/types';
+import { getDictItemList, deleteDict } from '@/services/dict';
 import useTableRequest from '@/hooks/useTableRequest';
 import CommonTable from '@/components/CommonTable';
-import { strategyColumns } from '@/pages/configurify/columns';
+import { configAudioColumns } from '@/pages/configurify/columns';
+import { ConfigTypeEnum } from '@/enum';
 
-const tableColumns = strategyColumns;
+const tableColumns = configAudioColumns;
 
-const StrategyIndex: React.FC = () => {
+const type = ConfigTypeEnum.TIME_LIMIT;
+
+const UserManageIndex: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const history = useHistory();
 
@@ -25,10 +27,11 @@ const StrategyIndex: React.FC = () => {
   }, [actionRef]);
 
   const handleRouteAdd = useCallback(() => {
-    history.push('/strategy/add');
+    //
+    history.push(`/config/time/${type}/add`);
   }, []);
 
-  const { mutate: deletetListItem } = useMutation((id: number) => deleteStrategy(id), {
+  const { mutate: deletetListItem } = useMutation((id: number) => deleteDict(id), {
     onSuccess: () => {
       message.success('操作成功');
       submitSuccess?.();
@@ -39,7 +42,7 @@ const StrategyIndex: React.FC = () => {
     (id: number) => {
       Modal.confirm({
         title: '删除确认',
-        content: '确认删除该攻略？',
+        content: '确认删除该配置项？',
         okText: '确认',
         cancelText: '取消',
         okType: 'danger',
@@ -51,19 +54,17 @@ const StrategyIndex: React.FC = () => {
     [deletetListItem],
   );
 
-  const fetchDate = useTableRequest(getStrategyList);
+  const fetchDate = useTableRequest(() => getDictItemList(type));
 
   const columns = useMemo(() => {
     return _values(
       produce(tableColumns, (draft) => {
-        draft.option!.render = (_, record) => {
+        draft.option!.render = (_, record: DictItemSSD) => {
           return (
             <>
-              <Link to={`/strategy/${record.strategyId}/edit`}>编辑</Link>
+              <Link to={`/config/time/${type}/${record.dictCode}/edit`}>编辑</Link>
               <Divider type="vertical" />
-              <Link to={`/${record.strategyId}/chapter`}>配置章节</Link>
-              <Divider type="vertical" />
-              <a onClick={() => deleteItem(record.strategyId)}>删除</a>
+              <a onClick={() => deleteItem(record.dictCode)}>删除</a>
             </>
           );
         };
@@ -82,9 +83,9 @@ const StrategyIndex: React.FC = () => {
   return (
     <PageContainer>
       <CommonTable
-        rowKey="strategyId"
-        search={false}
+        rowKey="dictCode"
         actionRef={actionRef}
+        search={false}
         request={fetchDate}
         columns={columns}
         toolBarRender={toolBarRender}
@@ -93,4 +94,4 @@ const StrategyIndex: React.FC = () => {
   );
 };
 
-export default StrategyIndex;
+export default UserManageIndex;

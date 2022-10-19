@@ -2,16 +2,17 @@ import React, { useCallback } from 'react';
 import _last from 'lodash/last';
 import { useMutation } from 'react-query';
 import { PlusOutlined } from '@ant-design/icons';
-import { Form, Input, Row, Col, Card, InputNumber, DatePicker } from 'antd';
+import { Form, Input, Row, Col, Card } from 'antd';
 import type { FormInstance, FormProps } from 'antd/es/form';
-import type { AddBannerParams } from '@/types';
+import DictSelect from '@/components/DictSelect';
+import type { AddStrategyParams } from '@/types';
 import FigureFormList from './FigureFormList';
-import { addBanner, editBanner } from '@/services/banner';
+import { addStrategy, editStrategy } from '@/services/strategy';
 import Upload from '@/components/Upload';
 import styles from './StrategyForm.less';
 
 interface BannerFormProps extends FormProps {
-  formRef: React.RefObject<FormInstance<AddBannerParams>>;
+  formRef: React.RefObject<FormInstance<AddStrategyParams>>;
   isEdit?: boolean;
   onSuccess?: () => void;
 }
@@ -23,7 +24,7 @@ const BannerForm: React.FC<BannerFormProps> = ({
   ...otherProps
 }) => {
   const { mutate } = useMutation(
-    (values: AddBannerParams) => (isEdit ? editBanner(values) : addBanner(values)),
+    (values: AddStrategyParams) => (isEdit ? editStrategy(values) : addStrategy(values)),
     {
       onSuccess: () => {
         onSuccess?.();
@@ -32,10 +33,10 @@ const BannerForm: React.FC<BannerFormProps> = ({
   );
 
   const handleFinish = useCallback(
-    async (values: AddBannerParams) => {
+    async (values: AddStrategyParams) => {
       mutate({
         ...values,
-        bannerPath: _last(values.bannerPath)?.url,
+        filesJson: JSON.stringify(values.filesJson),
       });
     },
     [mutate],
@@ -45,6 +46,20 @@ const BannerForm: React.FC<BannerFormProps> = ({
     <Form {...otherProps} ref={formRef} onFinish={handleFinish} layout="vertical">
       <Card className={styles.card}>
         <Row gutter={100}>
+          <Col span={8}>
+            <Form.Item
+              label="主题"
+              name="strategyName"
+              rules={[
+                {
+                  required: true,
+                  message: '请输入主题',
+                },
+              ]}
+            >
+              <Input placeholder="请输入主题" />
+            </Form.Item>
+          </Col>
           <Col span={24}>
             <Form.Item hidden name="strategyId">
               <Input placeholder="这是一个隐藏起来的表单域" />
@@ -60,20 +75,7 @@ const BannerForm: React.FC<BannerFormProps> = ({
               </Upload>
             </Form.Item>
           </Col>
-          <Col span={8}>
-            <Form.Item
-              label="主题"
-              name="strategyTitle"
-              rules={[
-                {
-                  required: true,
-                  message: '请输入主题',
-                },
-              ]}
-            >
-              <Input placeholder="请输入主题" />
-            </Form.Item>
-          </Col>
+
           <Col span={16}>
             <Form.Item
               label="背景介绍"
@@ -102,11 +104,17 @@ const BannerForm: React.FC<BannerFormProps> = ({
               rules={[
                 {
                   required: true,
+                  type: 'number',
                   message: '请选择个人奖策略',
                 },
               ]}
             >
-              <Input placeholder="请选择个人奖策略" />
+              <DictSelect
+                valueType="dictCode"
+                enumKey="reward_strategy"
+                placeholder="请选择个人奖策略"
+                allowClear
+              />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -116,11 +124,17 @@ const BannerForm: React.FC<BannerFormProps> = ({
               rules={[
                 {
                   required: true,
+                  type: 'number',
                   message: '请选择个人奖',
                 },
               ]}
             >
-              <Input placeholder="请选择个人奖" maxLength={500} />
+              <DictSelect
+                valueType="dictCode"
+                enumKey="reward"
+                placeholder="请选择个人奖"
+                allowClear
+              />
             </Form.Item>
           </Col>
         </Row>
@@ -161,10 +175,16 @@ const BannerForm: React.FC<BannerFormProps> = ({
                 {
                   required: true,
                   message: '请选择终极宝藏',
+                  type: 'number',
                 },
               ]}
             >
-              <Input placeholder="请选择终极宝藏" maxLength={500} />
+              <DictSelect
+                valueType="dictCode"
+                enumKey="final_reward"
+                placeholder="请选择终极宝藏"
+                allowClear
+              />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -174,11 +194,18 @@ const BannerForm: React.FC<BannerFormProps> = ({
               rules={[
                 {
                   required: true,
+                  type: 'number',
                   message: '请选择时效',
                 },
               ]}
             >
-              <DatePicker placeholder="请选择时效" style={{ width: '100%' }} />
+              {/* time_limit */}
+              <DictSelect
+                valueType="dictCode"
+                enumKey="strategy_time_limit"
+                placeholder="请选择终极宝藏"
+                allowClear
+              />
             </Form.Item>
           </Col>
         </Row>

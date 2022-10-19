@@ -1,4 +1,4 @@
-﻿// import { AuthorityMap } from '../src/access';
+﻿import { AuthorityMap } from '../src/access';
 // import runtimeConfig from './runtime';
 
 // path: `${runtimeConfig.heraOrigin}/roleManage`,
@@ -21,7 +21,6 @@ export default [
         path: '/',
         redirect: '/welcome',
       },
-
       {
         path: '/user',
         layout: false,
@@ -36,26 +35,28 @@ export default [
       {
         path: '/banner',
         name: 'banner',
-        icon: 'MenuOutlined',
+        icon: 'AppstoreOutlined',
         routes: [
           {
-            path: '.',
+            access: AuthorityMap.BANNER_INDEX,
+            path: './',
             name: 'list',
-            hideInMenu: true,
             component: './banner',
-            exact: true,
+            hideInMenu: true,
           },
           {
+            access: AuthorityMap.BANNER_ADD,
             path: 'add',
             name: 'add',
-            hideInMenu: true,
             component: './banner/add',
+            hideInMenu: true,
           },
           {
+            access: AuthorityMap.BANNER_EDIT,
             path: ':id/edit',
             name: 'edit',
-            hideInMenu: true,
             component: './banner/edit',
+            hideInMenu: true,
           },
         ],
       },
@@ -65,11 +66,10 @@ export default [
         icon: 'MenuOutlined',
         routes: [
           {
-            path: '.',
+            path: './',
             name: 'list',
             hideInMenu: true,
             component: './strategy',
-            exact: true,
           },
           {
             path: 'add',
@@ -91,11 +91,10 @@ export default [
         icon: 'MenuOutlined',
         routes: [
           {
-            path: '.',
+            path: './',
             name: 'list',
             hideInMenu: true,
             component: './figure',
-            exact: true,
           },
           {
             path: 'add',
@@ -112,6 +111,32 @@ export default [
         ],
       },
       {
+        path: '/:strategyId/chapter',
+        name: 'chapter',
+        icon: 'MenuOutlined',
+        hideInMenu: true,
+        routes: [
+          {
+            path: './',
+            name: 'list',
+            hideInMenu: true,
+            component: './chapter',
+          },
+          {
+            path: 'add',
+            name: 'add',
+            hideInMenu: true,
+            component: './chapter/add',
+          },
+          {
+            path: ':id/edit',
+            name: 'edit',
+            hideInMenu: true,
+            component: './chapter/edit',
+          },
+        ],
+      },
+      {
         path: '/config',
         icon: 'setting',
         name: 'config',
@@ -122,11 +147,10 @@ export default [
             icon: 'MenuOutlined',
             routes: [
               {
-                path: '.',
+                path: './',
                 name: 'list',
                 hideInMenu: true,
                 component: './config/audio',
-                exact: true,
               },
               {
                 path: ':type/add',
@@ -148,11 +172,10 @@ export default [
             icon: 'MenuOutlined',
             routes: [
               {
-                path: '.',
+                path: './',
                 name: 'list',
                 hideInMenu: true,
                 component: './config/image',
-                exact: true,
               },
               {
                 path: ':type/add',
@@ -174,11 +197,10 @@ export default [
             icon: 'MenuOutlined',
             routes: [
               {
-                path: '.',
+                path: './',
                 name: 'list',
                 hideInMenu: true,
                 component: './config/reward',
-                exact: true,
               },
               {
                 path: ':type/add',
@@ -200,11 +222,10 @@ export default [
             icon: 'MenuOutlined',
             routes: [
               {
-                path: '.',
+                path: './',
                 name: 'list',
                 hideInMenu: true,
                 component: './config/strategy',
-                exact: true,
               },
               {
                 path: ':type/add',
@@ -226,11 +247,35 @@ export default [
             icon: 'MenuOutlined',
             routes: [
               {
-                path: '.',
+                path: './',
                 name: 'list',
                 hideInMenu: true,
                 component: './config/final',
-                exact: true,
+              },
+              {
+                path: ':type/add',
+                name: 'add',
+                hideInMenu: true,
+                component: './config/add',
+              },
+              {
+                path: ':type/:id/edit',
+                name: 'edit',
+                hideInMenu: true,
+                component: './config/edit',
+              },
+            ],
+          },
+          {
+            path: 'time',
+            name: 'time',
+            icon: 'MenuOutlined',
+            routes: [
+              {
+                path: './',
+                name: 'list',
+                hideInMenu: true,
+                component: './config/time',
               },
               {
                 path: ':type/add',
@@ -259,11 +304,10 @@ export default [
             icon: 'MenuOutlined',
             routes: [
               {
-                path: '.',
+                path: './',
                 name: 'list',
                 hideInMenu: true,
                 component: './system/dept',
-                exact: true,
               },
               {
                 path: 'add',
@@ -286,11 +330,10 @@ export default [
             routes: [
               {
                 // access: AuthorityMap.ROLE_INDEX,
-                path: '.',
+                path: './',
                 name: 'list',
                 hideInMenu: true,
                 component: './system/role',
-                // exact: true,
               },
               {
                 // access: AuthorityMap.ROLE_ADD,
@@ -315,11 +358,10 @@ export default [
             routes: [
               {
                 // access: AuthorityMap.USER_INDEX,
-                path: '.',
+                path: './',
                 name: 'list',
                 hideInMenu: true,
                 component: './system/user',
-                // exact: true,
               },
               {
                 // access: AuthorityMap.USER_ADD,
@@ -349,7 +391,7 @@ export default [
           //       name: 'index',
           //       hideInMenu: true,
           //       component: './system/company',
-          //       exact: true,
+          //
           //     },
           //     {
           //       access: AuthorityMap.COMPANY_ADD,
@@ -363,7 +405,7 @@ export default [
           //       path: '/system/company/:id',
           //       name: 'companyDetail',
           //       hideInMenu: true,
-          //       exact: true,
+          //
           //       component: './system/company/detail',
           //     },
           //     {
@@ -387,7 +429,7 @@ export default [
           //       name: 'index',
           //       hideInMenu: true,
           //       component: './system/dept',
-          //       exact: true,
+          //
           //     },
           //     {
           //       access: AuthorityMap.DEPT_ADD,
@@ -412,11 +454,10 @@ export default [
             hideInMenu: true,
             routes: [
               {
-                path: '.',
+                path: './',
                 name: 'list',
                 hideInMenu: true,
                 component: './system/dict',
-                exact: true,
               },
               {
                 path: 'add',

@@ -6,34 +6,35 @@ import { PageContainer } from '@ant-design/pro-layout';
 import { useHistory, useParams } from 'umi';
 import { useQuery, useQueryClient } from 'react-query';
 import type { FormInstance } from 'antd/es/form';
-import type { AddStrategyParams } from '@/types';
-import { getStrategyInfo } from '@/services/strategy';
-import StrategyForm from './components/StrategyForm';
+import type { AddChapterParams } from '@/types';
+import { getChapterInfo } from '@/services/chapter';
+import ChapterForm from './components/ChapterForm';
 
 const EditIndex: React.FC = () => {
-  const formRef = useRef<FormInstance<AddStrategyParams>>(null);
+  const formRef = useRef<FormInstance<AddChapterParams>>(null);
   const history = useHistory();
   const queryClient = useQueryClient();
-  const { id }: { id: string } = useParams();
+  const { id, strategyId }: { strategyId: string; id: string } = useParams();
 
-  const { data } = useQuery(['getStrategyInfo', id], () => getStrategyInfo(id), {
+  const { data } = useQuery(['getChapterInfo', id], () => getChapterInfo(id), {
     enabled: !!id,
     select: (d) => d.data,
   });
 
   const initialValues = useMemo(() => {
     if (!data) return undefined;
+    const { questions, filesJson } = data;
     const values: any = {
       ...data,
-      filesJson: JSON.parse(data.filesJson),
+      filesJson: JSON.parse(filesJson),
     };
     return values;
   }, [data]);
 
   const handleSuccess = useCallback(() => {
     message.success('操作成功');
-    queryClient.invalidateQueries(['getStrategyInfo', id]);
-    history.replace('/strategy');
+    queryClient.invalidateQueries(['getChapterInfo', id]);
+    history.replace(`/${strategyId}/chapter`);
   }, [history]);
 
   const handleCancel = useCallback(() => {
@@ -57,8 +58,9 @@ const EditIndex: React.FC = () => {
     >
       <Card>
         {initialValues !== undefined && (
-          <StrategyForm
+          <ChapterForm
             isEdit
+            strategyId={strategyId}
             formRef={formRef}
             onSuccess={handleSuccess}
             initialValues={initialValues}

@@ -4,31 +4,32 @@ import { produce } from 'immer';
 import { useMutation } from 'react-query';
 
 import { Link } from 'umi';
-import { useHistory } from 'umi';
+import { useHistory, useParams } from 'umi';
 import { Button, Divider, Modal, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ActionType } from '@ant-design/pro-table';
-import { getStrategyList, deleteStrategy } from '@/services/strategy';
+import { getChapterList, deleteChapter } from '@/services/chapter';
 import useTableRequest from '@/hooks/useTableRequest';
 import CommonTable from '@/components/CommonTable';
-import { strategyColumns } from '@/pages/configurify/columns';
+import { chapterColumns } from '@/pages/configurify/columns';
 
-const tableColumns = strategyColumns;
+const tableColumns = chapterColumns;
 
-const StrategyIndex: React.FC = () => {
+const BannerIndex: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const history = useHistory();
+  const { strategyId }: { strategyId: string } = useParams();
 
   const submitSuccess = useCallback(() => {
     actionRef?.current?.reload();
   }, [actionRef]);
 
   const handleRouteAdd = useCallback(() => {
-    history.push('/strategy/add');
+    history.push(`/${strategyId}/chapter/add`);
   }, []);
 
-  const { mutate: deletetListItem } = useMutation((id: number) => deleteStrategy(id), {
+  const { mutate: deletetListItem } = useMutation((id: number) => deleteChapter(id), {
     onSuccess: () => {
       message.success('操作成功');
       submitSuccess?.();
@@ -39,7 +40,7 @@ const StrategyIndex: React.FC = () => {
     (id: number) => {
       Modal.confirm({
         title: '删除确认',
-        content: '确认删除该攻略？',
+        content: '确认删除该章节？',
         okText: '确认',
         cancelText: '取消',
         okType: 'danger',
@@ -51,7 +52,7 @@ const StrategyIndex: React.FC = () => {
     [deletetListItem],
   );
 
-  const fetchDate = useTableRequest(getStrategyList);
+  const fetchDate = useTableRequest(() => getChapterList({ strategyId }));
 
   const columns = useMemo(() => {
     return _values(
@@ -59,11 +60,9 @@ const StrategyIndex: React.FC = () => {
         draft.option!.render = (_, record) => {
           return (
             <>
-              <Link to={`/strategy/${record.strategyId}/edit`}>编辑</Link>
+              <Link to={`/${strategyId}/chapter/${record.chapterId}/edit`}>编辑</Link>
               <Divider type="vertical" />
-              <Link to={`/${record.strategyId}/chapter`}>配置章节</Link>
-              <Divider type="vertical" />
-              <a onClick={() => deleteItem(record.strategyId)}>删除</a>
+              <a onClick={() => deleteItem(record.chapterId)}>删除</a>
             </>
           );
         };
@@ -82,7 +81,7 @@ const StrategyIndex: React.FC = () => {
   return (
     <PageContainer>
       <CommonTable
-        rowKey="strategyId"
+        rowKey="bannerId"
         search={false}
         actionRef={actionRef}
         request={fetchDate}
@@ -93,4 +92,4 @@ const StrategyIndex: React.FC = () => {
   );
 };
 
-export default StrategyIndex;
+export default BannerIndex;

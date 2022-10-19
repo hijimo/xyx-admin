@@ -36,10 +36,10 @@ const ConfigForm: React.FC<ConfigFormProps> = ({
 
   const handleFinish = useCallback(
     async (values: DictAddParams) => {
-      const { audio, image, price, remark, ...others } = values;
+      const { audio, image, price, remark, dictValue, ...others } = values;
       mutate({
         ...others,
-        dictValue: JSON.stringify({ audio, image, price, remark }),
+        dictValue: dictValue ?? JSON.stringify({ audio, image, price, remark }),
         dictType: type,
       });
     },
@@ -97,6 +97,24 @@ const ConfigForm: React.FC<ConfigFormProps> = ({
               <Input placeholder="请输入名称" />
             </Form.Item>
           </Col>
+          {[ConfigTypeEnum.TIME_LIMIT].includes(type) && (
+            <Col span={8}>
+              <Form.Item
+                label="配置值"
+                name="dictValue"
+                rules={[
+                  {
+                    required: true,
+                    message: '请输入配置值',
+                    type: 'number',
+                  },
+                ]}
+              >
+                <InputNumber placeholder="请输入配置值" style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+          )}
+
           {[ConfigTypeEnum.REWARD, ConfigTypeEnum.FIANL_REWARD].includes(type) && (
             <Col span={8}>
               <Form.Item

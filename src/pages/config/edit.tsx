@@ -17,6 +17,7 @@ const urls_map = {
   [ConfigTypeEnum.REWARD]: '/config/reward',
   [ConfigTypeEnum.REWARD_STRATEGY]: '/config/strategy',
   [ConfigTypeEnum.FIANL_REWARD]: '/config/final',
+  [ConfigTypeEnum.TIME_LIMIT]: '/config/time',
 };
 const EditIndex: React.FC = () => {
   const formRef = useRef<FormInstance<DictAddParams>>(null);

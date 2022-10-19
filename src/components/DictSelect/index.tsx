@@ -8,12 +8,14 @@ import { getDictItemList } from '@/services/dict';
 
 interface DictSelectProps<T> extends Omit<SelectProps<T>, 'options' | 'loading'> {
   enumKey: string;
+  valueType?: string;
   style?: React.CSSProperties;
 }
 
 const DictSelect = <T extends SelectValue = SelectValue>({
   enumKey,
   style,
+  valueType = 'dictValue',
   ...otherProps
 }: DictSelectProps<T>) => {
   const { data, isFetching } = useQuery(
@@ -25,9 +27,9 @@ const DictSelect = <T extends SelectValue = SelectValue>({
   const options = useMemo(() => {
     return data?.map((d) => ({
       label: d.dictLabel,
-      value: d.dictValue,
+      value: d[valueType],
     }));
-  }, [data]);
+  }, [data, valueType]);
 
   return (
     <Select

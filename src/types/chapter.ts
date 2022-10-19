@@ -1,6 +1,9 @@
 import type { PaginationParams, SSDBase } from './common';
 
 export interface ChapterListParams extends PaginationParams {}
+export interface AddChapterParams {}
+
+export interface ChapterSSD {}
 export interface ChapterListSSD extends SSDBase {
   /**
    * id

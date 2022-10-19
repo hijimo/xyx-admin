@@ -12,7 +12,7 @@ export interface StrategySSD extends SSDBase {
   /**
    * 攻略主题
    */
-  strategyTitle: string;
+  strategyName: string;
   /**
    * 背景介绍
    */
@@ -45,4 +45,5 @@ export interface StrategySSD extends SSDBase {
    * 是否下架：0正常1下架
    */
   strategyStatus: BooleanEnum;
+  filesJson: string;
 }

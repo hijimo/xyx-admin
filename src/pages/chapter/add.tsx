@@ -3,27 +3,16 @@ import { Button, message } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import { useHistory, useParams } from 'umi';
 import type { FormInstance } from 'antd/es/form';
-import type { DictAddParams } from '@/types';
-import ConfigForm from './components/ConfigForm';
-import { ConfigTypeEnum } from '@/enum';
-
-const urls_map = {
-  [ConfigTypeEnum.AUDIO]: '/config/audio',
-  [ConfigTypeEnum.IMAGE]: '/config/image',
-  [ConfigTypeEnum.REWARD]: '/config/reward',
-  [ConfigTypeEnum.REWARD_STRATEGY]: '/config/strategy',
-  [ConfigTypeEnum.FIANL_REWARD]: '/config/final',
-  [ConfigTypeEnum.TIME_LIMIT]: '/config/time',
-};
+import type { AddChapterParams } from '@/types';
+import ChapterForm from './components/ChapterForm';
 const AddIndex: React.FC = () => {
-  const formRef = useRef<FormInstance<DictAddParams>>(null);
+  const formRef = useRef<FormInstance<AddChapterParams>>(null);
   const history = useHistory();
-
-  const { type } = useParams() || {};
+  const { strategyId }: { strategyId: string } = useParams();
 
   const handleSuccess = useCallback(() => {
     message.success('添加成功');
-    history.replace(urls_map[type]);
+    history.replace(`/${strategyId}/chapter`);
   }, [history]);
 
   const handleCancel = useCallback(() => {
@@ -45,7 +34,7 @@ const AddIndex: React.FC = () => {
         </Button>,
       ]}
     >
-      <ConfigForm type={type} formRef={formRef} onSuccess={handleSuccess} />
+      <ChapterForm strategyId={strategyId} formRef={formRef} onSuccess={handleSuccess} />
     </PageContainer>
   );
 };

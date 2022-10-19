@@ -3,16 +3,16 @@ import type { StrategySSD } from '@/types';
 
 import { key, option, status } from './baseColumns';
 
-const strategyTitle: ProColumns = {
+const strategyName: ProColumns = {
   title: '主题',
-  dataIndex: 'strategyTitle',
+  dataIndex: 'strategyName',
   className: 'nowrap',
   search: false,
 };
 
 export const strategyColumns: Record<string, ProColumns<StrategySSD & { option: any }>> = {
   key,
-  strategyTitle,
+  strategyName,
   status: {
     ...status,
     dataIndex: 'strategyStatus',
