@@ -24,6 +24,10 @@ export enum ConfigTypeEnum {
    */
   TIME_LIMIT = 'strategy_time_limit',
 }
+export enum DisplayTypeEnum {
+  ALL = 0,
+  SCAN = 1,
+}
 export enum BooleanEnum {
   FALSE = 0,
   TRUE,
@@ -94,4 +98,9 @@ export enum ResourceType {
 export const ResourceTypeDesc = {
   [ResourceType.MENU]: '菜单',
   [ResourceType.BUTTON]: '按钮',
+} as const;
+
+export const DisplayTypeEnumDesc = {
+  [DisplayTypeEnum.ALL]: { text: '所有可见' },
+  [DisplayTypeEnum.SCAN]: { text: '扫码可见' },
 } as const;

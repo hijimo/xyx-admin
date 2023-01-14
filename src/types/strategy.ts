@@ -37,6 +37,7 @@ export interface StrategySSD extends SSDBase {
    * 终极宝箱id
    */
   finalRewardId: number;
+
   /**
    * 时效配置id
    */

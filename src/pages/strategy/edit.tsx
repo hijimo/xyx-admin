@@ -2,6 +2,7 @@ import React, { useRef, useCallback, useMemo } from 'react';
 import _isNil from 'lodash/isNil';
 import _first from 'lodash/first';
 import { Card, Button, message } from 'antd';
+import moment from 'moment';
 import { PageContainer } from '@ant-design/pro-layout';
 import { useHistory, useParams } from 'umi';
 import { useQuery, useQueryClient } from 'react-query';
@@ -9,6 +10,7 @@ import type { FormInstance } from 'antd/es/form';
 import type { AddStrategyParams } from '@/types';
 import { getStrategyInfo } from '@/services/strategy';
 import StrategyForm from './components/StrategyForm';
+import { values } from 'lodash';
 
 const EditIndex: React.FC = () => {
   const formRef = useRef<FormInstance<AddStrategyParams>>(null);
@@ -25,6 +27,7 @@ const EditIndex: React.FC = () => {
     if (!data) return undefined;
     const values: any = {
       ...data,
+      endDate: data.endDate ? moment(data.endDate) : undefined,
       filesJson: JSON.parse(data.filesJson),
     };
     return values;

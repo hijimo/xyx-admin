@@ -81,13 +81,23 @@ const remark2: ProColumns = {
     return text;
   },
 };
-
+const value: ProColumns = {
+  title: '配置值',
+  dataIndex: 'value',
+  className: 'nowrap',
+  search: false,
+  renderText: (_, record) => {
+    const text = JSON.parse(record.dictValue)?.value || '--';
+    return text;
+  },
+};
 export const configStrategyColumns = {
   key,
   dictLabel: {
     ...dictLabel,
     title: '名称',
   },
+  value,
   remark2,
   dictSort,
   gmtCreate,

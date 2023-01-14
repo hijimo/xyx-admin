@@ -2,13 +2,16 @@ import React, { useCallback } from 'react';
 import _last from 'lodash/last';
 import { useMutation } from 'react-query';
 import { PlusOutlined } from '@ant-design/icons';
-import { Form, Input, Row, Col, Card } from 'antd';
+import { Form, Input, Row, Col, Card, DatePicker } from 'antd';
 import type { FormInstance, FormProps } from 'antd/es/form';
 import DictSelect from '@/components/DictSelect';
 import type { AddStrategyParams } from '@/types';
 import FigureFormList from './FigureFormList';
+import { DATE_FORMAT_DATE } from '@/variables';
 import { addStrategy, editStrategy } from '@/services/strategy';
 import Upload from '@/components/Upload';
+import { DisplayTypeEnumDesc } from '@/enum';
+import EnumSelect from '@/components/DataSelect/EnumSelect';
 import styles from './StrategyForm.less';
 
 interface BannerFormProps extends FormProps {
@@ -36,6 +39,7 @@ const BannerForm: React.FC<BannerFormProps> = ({
     async (values: AddStrategyParams) => {
       mutate({
         ...values,
+        endDate: values.endDate.format(DATE_FORMAT_DATE),
         filesJson: JSON.stringify(values.filesJson),
       });
     },
@@ -46,7 +50,7 @@ const BannerForm: React.FC<BannerFormProps> = ({
     <Form {...otherProps} ref={formRef} onFinish={handleFinish} layout="vertical">
       <Card className={styles.card}>
         <Row gutter={100}>
-          <Col span={8}>
+          <Col span={12}>
             <Form.Item
               label="主题"
               name="strategyName"
@@ -58,6 +62,21 @@ const BannerForm: React.FC<BannerFormProps> = ({
               ]}
             >
               <Input placeholder="请输入主题" />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label="可见范围"
+              name="displayType"
+              rules={[
+                {
+                  required: true,
+                  message: '请选择可见范围',
+                  type: 'number',
+                },
+              ]}
+            >
+              <EnumSelect placeholder="请选择可见范围" enumDesc={DisplayTypeEnumDesc} />
             </Form.Item>
           </Col>
           <Col span={24}>
@@ -188,7 +207,7 @@ const BannerForm: React.FC<BannerFormProps> = ({
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item
+            {/* <Form.Item
               label="时效"
               name="timeLimitId"
               rules={[
@@ -199,13 +218,26 @@ const BannerForm: React.FC<BannerFormProps> = ({
                 },
               ]}
             >
-              {/* time_limit */}
               <DictSelect
                 valueType="dictCode"
                 enumKey="strategy_time_limit"
                 placeholder="请选择终极宝藏"
                 allowClear
               />
+            </Form.Item> */}
+            <Form.Item
+              label="时效"
+              name="endDate"
+              rules={[
+                {
+                  required: true,
+                  type: 'object',
+                  message: '请选择时效',
+                },
+              ]}
+            >
+              {/* time_limit */}
+              <DatePicker placeholder="请选择时效" mode="date" />
             </Form.Item>
           </Col>
         </Row>
